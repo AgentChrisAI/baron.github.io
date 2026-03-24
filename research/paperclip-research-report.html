@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paperclip AI — Research Report | Baron Von Claw</title>
+  <style>
+    :root {
+      --bg: #0a0c10;
+      --surface: #111318;
+      --surface2: #1a1d24;
+      --border: #2a2d36;
+      --accent: #3b82f6;
+      --accent2: #8b5cf6;
+      --accent3: #10b981;
+      --danger: #ef4444;
+      --warn: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0a0c10 0%, #0f172a 40%, #1e1b4b 100%);
+      padding: 80px 40px 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(59,130,246,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(59,130,246,0.15);
+      border: 1px solid rgba(59,130,246,0.4);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero .subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 32px;
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    p { color: var(--text); margin-bottom: 16px; }
+
+    /* ── AI Image Blocks ── */
+    .ai-image {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin: 32px 0;
+      display: block;
+    }
+    .image-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: -20px;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: var(--surface);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+      font-size: 1.05rem;
+      color: var(--white);
+      font-style: italic;
+    }
+    .callout.green { border-color: var(--accent3); }
+    .callout.purple { border-color: var(--accent2); }
+    .callout.warn { border-color: var(--warn); }
+
+    /* ── Grid Cards ── */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 24px 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 24px 0; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card .card-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .card h4 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .card p { font-size: 0.9rem; color: var(--muted); margin: 0; }
+
+    /* ── Feature Pill List ── */
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .pill {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+    .pill.green { border-color: rgba(16,185,129,0.4); color: var(--accent3); background: rgba(16,185,129,0.08); }
+    .pill.blue { border-color: rgba(59,130,246,0.4); color: var(--accent); background: rgba(59,130,246,0.08); }
+    .pill.purple { border-color: rgba(139,92,246,0.4); color: var(--accent2); background: rgba(139,92,246,0.08); }
+
+    /* ── Architecture Diagram ── */
+    .arch-diagram {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      margin: 32px 0;
+      text-align: center;
+    }
+    .arch-layer {
+      margin: 0 auto 8px;
+      max-width: 700px;
+    }
+    .arch-box {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin: 4px;
+    }
+    .arch-box.human { background: rgba(245,158,11,0.15); border: 2px solid var(--warn); color: var(--warn); }
+    .arch-box.paperclip { background: rgba(59,130,246,0.15); border: 2px solid var(--accent); color: var(--accent); font-size: 1rem; }
+    .arch-box.agent { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.4); color: var(--accent3); }
+    .arch-box.openclaw { background: rgba(139,92,246,0.15); border: 2px solid var(--accent2); color: var(--accent2); }
+    .arch-arrow { color: var(--muted); font-size: 1.5rem; margin: 4px 0; display: block; }
+
+    /* ── Comparison Table ── */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 0.9rem;
+    }
+    .compare-table th {
+      background: var(--surface2);
+      color: var(--white);
+      font-weight: 700;
+      padding: 14px 20px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+    .compare-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .compare-table tr:hover td { background: var(--surface); }
+    .compare-table .check { color: var(--accent3); font-weight: 700; }
+    .compare-table .cross { color: var(--danger); }
+    .compare-table .warn { color: var(--warn); }
+
+    /* ── Verdict Meter ── */
+    .verdict-meter {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    .verdict-meter h3 { margin-bottom: 24px; }
+    .meter-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .meter-label {
+      width: 200px;
+      font-size: 0.85rem;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+    .meter-bar-bg {
+      flex: 1;
+      height: 10px;
+      background: var(--surface2);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .meter-bar {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .meter-score {
+      width: 40px;
+      text-align: right;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ── Use Case Templates ── */
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .template-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .template-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .template-card .emoji { font-size: 2rem; margin-bottom: 10px; }
+    .template-card h5 { font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .template-card p { font-size: 0.75rem; color: var(--muted); margin: 0; }
+
+    /* ── Master-relevance section ── */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+      border: 1px solid rgba(139,92,246,0.3);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 24px 0;
+    }
+    .highlight-box h3 { color: var(--accent2); margin-bottom: 16px; }
+
+    /* ── Risk / Verdict ── */
+    .verdict-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 24px 0;
+    }
+    @media (max-width: 640px) { .verdict-grid { grid-template-columns: 1fr; } }
+    .verdict-panel {
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .verdict-panel.pros { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.3); }
+    .verdict-panel.cons { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.3); }
+    .verdict-panel h4 { margin-bottom: 14px; font-size: 1rem; }
+    .verdict-panel.pros h4 { color: var(--accent3); }
+    .verdict-panel.cons h4 { color: var(--danger); }
+    .verdict-panel ul { list-style: none; padding: 0; }
+    .verdict-panel ul li {
+      padding: 6px 0;
+      font-size: 0.88rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      gap: 8px;
+    }
+    .verdict-panel ul li:last-child { border-bottom: none; }
+
+    /* ── Footer ── */
+    .report-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      text-align: center;
+    }
+    .report-footer p { font-size: 0.8rem; color: var(--muted); margin: 4px 0; }
+    .report-footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── Infographic Row ── */
+    .infographic-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin: 32px 0;
+    }
+    .infographic-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 16px;
+      text-align: center;
+    }
+    .infographic-stat .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .infographic-stat .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
+    code {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+    }
+    pre {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      color: var(--accent3);
+      font-family: 'Courier New', monospace;
+      margin: 16px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Research Report · March 2026</div>
+  <h1><span>Paperclip AI</span> — Orchestration for<br>Zero-Human Companies</h1>
+  <p class="subtitle">A deep-dive into the Paperclip framework: what it is, how OpenClaw fits in, and whether it can power a fully agentic organisation with minimal human input.</p>
+  <div class="hero-meta">
+    <span>🦞 Baron Von Claw Research Division</span>
+    <span>📅 24 March 2026</span>
+    <span>🔗 <a href="https://github.com/paperclipai/paperclip" style="color:var(--accent)">github.com/paperclipai/paperclip</a></span>
+    <span>⭐ Active OSS · MIT License</span>
+  </div>
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+<section>
+  <div class="container">
+    <div class="section-label">01 — Executive Summary</div>
+    <h2>The Premise: If OpenClaw Is an Employee, Paperclip Is the Company</h2>
+
+    <div class="callout">
+      "If OpenClaw is an employee, Paperclip is the company." — Paperclip README
+    </div>
+
+    <p>Paperclip is an <strong>open-source, self-hosted Node.js + React orchestration platform</strong> designed to manage teams of AI agents running as an autonomous business. It is not an agent framework, not a chatbot, and not a workflow builder. It is a <strong>corporate operating system for AI agents</strong> — providing org charts, goal alignment, budget governance, heartbeat scheduling, ticket-based task management, and multi-company isolation in a single deployment.</p>
+
+    <p>Released under the MIT license in early 2026, it has rapidly accumulated community traction with nearly <strong>1,700+ GitHub issues</strong> tracked as of March 2026 — evidence of an active, growing community actively stress-testing it in production scenarios.</p>
+
+    <div class="infographic-row">
+      <div class="infographic-stat">
+        <div class="stat-num">0</div>
+        <div class="stat-label">humans required to run a company</div>
+      </div>
+      <div class="infographic-stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">companies per single deployment</div>
+      </div>
+      <div class="infographic-stat">
+        <div class="stat-num">MIT</div>
+        <div class="stat-label">open source, self-hosted, no account required</div>
+      </div>
+      <div class="infographic-stat">
+        <div class="stat-num">Any</div>
+        <div class="stat-label">agent runtime: OpenClaw, Claude, Codex, Cursor, Bash, HTTP</div>
+      </div>
+      <div class="infographic-stat">
+        <div class="stat-num">1</div>
+        <div class="stat-label">command to spin up a full company</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS PAPERCLIP -->
+<section>
+  <div class="container">
+    <div class="section-label">02 — What Is Paperclip?</div>
+    <h2>The Corporate Operating System for AI Agents</h2>
+
+    <img
+      class="ai-image"
+      src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ubniTdpUlZ5JyGYq42qVqJmh/user-mMnGhnBqNfwUkQ5j5F9fhVZk/img-UMGmnkgaO3gC6bs6GpRJN0ky.png?st=2026-03-24T05%3A00%3A57Z&se=2026-03-24T07%3A00%3A57Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=7daae675-7b42-4e2e-ab4c-8d8419a28d99&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-24T02%3A15%3A34Z&ske=2026-03-25T02%3A15%3A34Z&sks=b&skv=2026-02-06&sig=k/hKl2/eO7yHMnTimHDKiVx6iu3ntEqIPknkJI0auL0%3D"
+      alt="Paperclip as the backbone of an AI autonomous company"
+    />
+    <p class="image-caption">AI-generated: Paperclip as the orchestration backbone connecting diverse AI agent runtimes into one coherent company.</p>
+
+    <p>Paperclip operates at a layer <strong>above individual agents</strong>. It doesn't care whether your engineer is Claude Code, your CMO is OpenClaw, or your QA agent is a Python script firing webhooks. If it can receive a heartbeat signal, it's hired.</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🏢</div>
+        <h4>Org Chart Engine</h4>
+        <p>Define hierarchies, roles, reporting lines, and delegation paths. CEO reports to Board (you). CTO reports to CEO. Engineers report to CTO. Delegation flows automatically.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h4>Goal Alignment</h4>
+        <p>Every task carries its full "why" ancestry — from company mission → project goal → agent goal → task. Agents always know their context, not just their instructions.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💓</div>
+        <h4>Heartbeat Scheduler</h4>
+        <p>Agents wake on configurable schedules, check their work queue, and act. No manual kicks. No babysitting. Recurring jobs (support, social, reports) happen automatically.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <h4>Budget Governance</h4>
+        <p>Monthly token budgets per agent. Soft warning at 80%. Hard stop at 100%. Atomic budget enforcement — no runaway spend, no $800 token bills overnight.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎟</div>
+        <h4>Ticket System</h4>
+        <p>Every task is a ticket with a clear owner, status, and threaded conversation. Full tool-call tracing. Immutable audit log. Nothing happens in the dark.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏛</div>
+        <h4>Board Governance</h4>
+        <p>You are the board. Agents can't hire without your approval. CEOs can't execute unapproved strategy. You can pause, reassign, or terminate any agent at any time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE-STEP SETUP -->
+<section>
+  <div class="container">
+    <div class="section-label">03 — How It Works</div>
+    <h2>From Zero to Autonomous Company in Three Steps</h2>
+
+    <div class="grid-3">
+      <div class="card" style="border-color: rgba(59,130,246,0.4)">
+        <div style="font-size:3rem;font-weight:900;color:var(--accent);margin-bottom:12px;">01</div>
+        <h4>Define the Goal</h4>
+        <p>Set the company mission: <em>"Build the #1 AI note-taking app to $1M MRR."</em> Every agent and every task will trace back to this.</p>
+      </div>
+      <div class="card" style="border-color: rgba(139,92,246,0.4)">
+        <div style="font-size:3rem;font-weight:900;color:var(--accent2);margin-bottom:12px;">02</div>
+        <h4>Hire the Team</h4>
+        <p>Assign roles: CEO (Claude), CTO (Codex), CMO (OpenClaw), designers, marketers. Any bot, any provider, any runtime.</p>
+      </div>
+      <div class="card" style="border-color: rgba(16,185,129,0.4)">
+        <div style="font-size:3rem;font-weight:900;color:var(--accent3);margin-bottom:12px;">03</div>
+        <h4>Approve & Run</h4>
+        <p>Review the CEO's strategy, set budgets, hit go. Monitor from the dashboard or from your phone. Intervene only when you want to.</p>
+      </div>
+    </div>
+
+    <pre>$ npx paperclipai onboard --yes</pre>
+    <p style="color:var(--muted);font-size:0.85rem;">One command. Node.js 20+, pnpm 9.15+. Embedded Postgres auto-created. No Paperclip account required.</p>
+  </div>
+</section>
+
+<!-- ARCHITECTURE: WHERE OPENCLAW FITS -->
+<section>
+  <div class="container">
+    <div class="section-label">04 — OpenClaw in the Architecture</div>
+    <h2>Where Baron Von Claw Fits in the Paperclip Stack</h2>
+
+    <img
+      class="ai-image"
+      src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ubniTdpUlZ5JyGYq42qVqJmh/user-mMnGhnBqNfwUkQ5j5F9fhVZk/img-q1KDEFdeiE6PpXw6aPIfkgsA.png?st=2026-03-24T05%3A00%3A57Z&se=2026-03-24T07%3A00%3A57Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=f1dafa11-a0c2-4092-91d4-10981fbda051&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-24T02%3A15%3A12Z&ske=2026-03-25T02%3A15%3A12Z&sks=b&skv=2026-02-06&sig=8DxSldv4g3FRY/IWBWN%2Bv7fLv%2B%2B5rWuAWs6RrjorT%2BQ%3D"
+      alt="AI company org chart with OpenClaw as CMO"
+    />
+    <p class="image-caption">AI-generated: A sample Paperclip company org chart — CEO (Claude), CMO (OpenClaw), CTO (Cursor), with engineering and marketing sub-agents below.</p>
+
+    <p>Paperclip explicitly names OpenClaw as a <strong>first-class citizen</strong> in its architecture. The docs and README both list it as a primary example agent alongside Claude, Codex, and Cursor. OpenClaw is uniquely powerful within Paperclip for several reasons:</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <h4>Native Heartbeat Compatibility</h4>
+        <p>OpenClaw's heartbeat system is <em>exactly</em> the heartbeat protocol Paperclip uses to wake agents. The integration is architecturally native — not bolted on.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h4>SKILLS.md Runtime Injection</h4>
+        <p>Paperclip injects a SKILLS.md at runtime so agents know how to discover context, navigate the org structure, and find their assigned tasks without retraining.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧠</div>
+        <h4>Persistent Context</h4>
+        <p>OpenClaw's memory system (MEMORY.md + daily files) means it can act as a continuously-informed CMO, ops agent, or CEO — maintaining context across heartbeat cycles.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h4>Tool Access</h4>
+        <p>OpenClaw agents have access to Gmail, Calendar, code execution, browser control, file I/O — making them capable of end-to-end business tasks, not just chat responses.</p>
+      </div>
+    </div>
+
+    <!-- Architecture Diagram -->
+    <div class="arch-diagram">
+      <h3 style="margin-bottom:32px;color:var(--white)">Paperclip Architecture — Layer Model</h3>
+
+      <div class="arch-layer">
+        <span class="arch-box human">👑 You (Board of Directors) — Human</span>
+      </div>
+      <div class="arch-arrow">▼ approve strategy · set budgets · override · terminate</div>
+
+      <div class="arch-layer">
+        <span class="arch-box paperclip">📎 PAPERCLIP — Orchestration Layer</span>
+      </div>
+      <p style="font-size:0.8rem;color:var(--muted);margin:4px 0 12px;">Org chart · Goals · Budgets · Heartbeats · Tickets · Governance · Audit</p>
+      <div class="arch-arrow">▼ assign tasks · inject context · track costs · enforce budgets</div>
+
+      <div class="arch-layer">
+        <span class="arch-box openclaw">🦞 OpenClaw (CMO / Ops / Analyst)</span>
+        <span class="arch-box agent">🤖 Claude (CEO / COO)</span>
+        <span class="arch-box agent">⚡ Codex (CTO / Engineers)</span>
+        <span class="arch-box agent">🎯 Cursor (Dev Lead)</span>
+        <span class="arch-box agent">🐚 Bash Scripts</span>
+        <span class="arch-box agent">🌐 HTTP Webhooks</span>
+      </div>
+      <div class="arch-arrow">▼ results · tool calls · decisions · costs</div>
+
+      <div class="arch-layer">
+        <span class="arch-box human" style="font-size:0.8rem">External APIs · Databases · CRMs · Email · Code Repos</span>
+      </div>
+    </div>
+
+    <div class="callout purple">
+      OpenClaw's role in Paperclip: <strong>The always-on, memory-equipped, multi-tool agent</strong> — most suited for CMO, Operations, Customer Success, or any role requiring continuous context and multi-system integration. It's the only agent that talks to you via WhatsApp/Telegram while doing its job.
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES & COMMUNITY -->
+<section>
+  <div class="container">
+    <div class="section-label">05 — Use Cases & Community Templates</div>
+    <h2>What People Are Building</h2>
+
+    <p>Paperclip's website showcases a "ClipMart" marketplace (coming soon) with pre-built company templates. The community is already converging on these proven use case patterns:</p>
+
+    <div class="template-grid">
+      <div class="template-card">
+        <div class="emoji">📣</div>
+        <h5>Content Marketing Agency</h5>
+        <p>SEO, blogs, social media on autopilot — 8 agents</p>
+      </div>
+      <div class="template-card">
+        <div class="emoji">📈</div>
+        <h5>Crypto Trading Desk</h5>
+        <p>Analysis, execution, risk, compliance — 12 agents</p>
+      </div>
+      <div class="template-card">
+        <div class="emoji">🛍</div>
+        <h5>E-commerce Operator</h5>
+        <p>Listings, support, inventory, ads — 10 agents</p>
+      </div>
+      <div class="template-card">
+        <div class="emoji">🎥</div>
+        <h5>YouTube Factory</h5>
+        <p>Scripts, edits, thumbnails, scheduling — 6 agents</p>
+      </div>
+      <div class="template-card">
+        <div class="emoji">💻</div>
+        <h5>Dev Agency</h5>
+        <p>PM, engineers, QA, DevOps pipeline — 9 agents</p>
+      </div>
+      <div class="template-card">
+        <div class="emoji">🏠</div>
+        <h5>Real Estate Leads</h5>
+        <p>Prospecting, outreach, follow-up, closing — 7 agents</p>
+      </div>
+      <div class="template-card">
+        <div class="emoji">📲</div>
+        <h5>Mobile Marketing Co</h5>
+        <p>Content, ads, SEO, analytics — 8 agents</p>
+      </div>
+      <div class="template-card">
+        <div class="emoji">🎵</div>
+        <h5>Faceless TikTok Factory</h5>
+        <p>Producer, scriptwriter, editor, scheduler — 5 agents</p>
+      </div>
+      <div class="template-card">
+        <div class="emoji">📊</div>
+        <h5>Research & Intel</h5>
+        <p>Web crawlers, analysts, report writers — custom</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:40px;margin-bottom:16px;">Community Activity (GitHub — March 2026)</h3>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🐛</div>
+        <h4>1,678+ Issues Open</h4>
+        <p>Active bug reports and feature requests. Community is stress-testing it hard — onboarding friction, agent config complexity, and docs are recurring themes.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💬</div>
+        <h4>Discord Community</h4>
+        <p>Active Discord at <code>discord.gg/m4HZY7xNG3</code> — where builders share company templates, agent configs, and architecture patterns.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🗺</div>
+        <h4>Active Roadmap</h4>
+        <p>ClipMart (buy/sell company templates), cloud agent support, easier onboarding, plugin system (greenlit), and bring-your-own-ticket-system all in progress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PURELY AGENTIC ORG ASSESSMENT -->
+<section>
+  <div class="container">
+    <div class="section-label">06 — Autonomy Assessment</div>
+    <h2>Can Paperclip Run a Purely Agentic Organisation?</h2>
+
+    <img
+      class="ai-image"
+      src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ubniTdpUlZ5JyGYq42qVqJmh/user-mMnGhnBqNfwUkQ5j5F9fhVZk/img-sqcpLhPBoEeSNecpMty2ZCFs.png?st=2026-03-24T05%3A01%3A37Z&se=2026-03-24T07%3A01%3A37Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=b1a0ae1f-618f-4548-84fd-8b16cacd5485&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-24T04%3A44%3A11Z&ske=2026-03-25T04%3A44%3A11Z&sks=b&skv=2026-02-06&sig=k/hKl2/eO7yHMnTimHDKiVx6iu3ntEqIPknkJI0auL0%3D"
+      alt="Zero-human operations center dashboard"
+    />
+    <p class="image-caption">AI-generated: The vision — a single human board member overseeing multiple fully autonomous AI companies from a mobile dashboard.</p>
+
+    <div class="verdict-meter">
+      <h3>Autonomy Readiness Scorecard</h3>
+      <div class="meter-row">
+        <div class="meter-label">Goal Alignment</div>
+        <div class="meter-bar-bg"><div class="meter-bar" style="width:95%"></div></div>
+        <div class="meter-score">95%</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label">Agent Coordination</div>
+        <div class="meter-bar-bg"><div class="meter-bar" style="width:85%"></div></div>
+        <div class="meter-score">85%</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label">Cost Governance</div>
+        <div class="meter-bar-bg"><div class="meter-bar" style="width:90%"></div></div>
+        <div class="meter-score">90%</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label">Scheduling / Heartbeats</div>
+        <div class="meter-bar-bg"><div class="meter-bar" style="width:92%"></div></div>
+        <div class="meter-score">92%</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label">Observability / Audit</div>
+        <div class="meter-bar-bg"><div class="meter-bar" style="width:88%"></div></div>
+        <div class="meter-score">88%</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label">Human Override Mechanisms</div>
+        <div class="meter-bar-bg"><div class="meter-bar" style="width:95%"></div></div>
+        <div class="meter-score">95%</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label">Production Maturity</div>
+        <div class="meter-bar-bg"><div class="meter-bar" style="width:55%"></div></div>
+        <div class="meter-score">55%</div>
+      </div>
+      <div class="meter-row">
+        <div class="meter-label">Documentation Quality</div>
+        <div class="meter-bar-bg"><div class="meter-bar" style="width:50%"></div></div>
+        <div class="meter-score">50%</div>
+      </div>
+    </div>
+
+    <div class="verdict-grid">
+      <div class="verdict-panel pros">
+        <h4>✅ What Makes It Viable for Zero-Human Ops</h4>
+        <ul>
+          <li>✅ Heartbeat-driven scheduling removes need for human task kickoff</li>
+          <li>✅ Goal ancestry ensures agents don't drift from mission</li>
+          <li>✅ Budget enforcement prevents runaway costs without human watch</li>
+          <li>✅ Atomic task checkout prevents duplicate work</li>
+          <li>✅ Persistent state — agents resume where they left off</li>
+          <li>✅ Immutable audit log means accountability without babysitting</li>
+          <li>✅ Multi-company isolation — run a portfolio from one install</li>
+          <li>✅ Mobile monitoring — you can truly run it from a phone</li>
+          <li>✅ Board governance model is correct — human as override, not operator</li>
+        </ul>
+      </div>
+      <div class="verdict-panel cons">
+        <h4>⚠️ Limitations & Risks to Factor In</h4>
+        <ul>
+          <li>⚠️ Early-stage: 1,678 open issues — rough edges exist</li>
+          <li>⚠️ Docs are acknowledged as incomplete (on roadmap)</li>
+          <li>⚠️ Agents still make mistakes — requires periodic human review of outputs</li>
+          <li>⚠️ Governance gates (hire approval) require human — by design</li>
+          <li>⚠️ Cloud agent support (Cursor/e2b) still pending</li>
+          <li>⚠️ New hire approval requires human by default — autonomous hiring blocked</li>
+          <li>⚠️ Agent quality still bounded by underlying LLM capabilities</li>
+          <li>⚠️ Harness engineering (agent skill configuration) is non-trivial</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <strong>Verdict:</strong> Paperclip is <em>architecturally designed</em> for zero-human operations. The entire framework is built around the assumption that humans are board-level strategic overseers, not operators. For low-risk, repeatable business functions (content, SEO, research, outreach, code review), it can operate with minimal human input today. For high-stakes decisions (strategy pivots, hiring, financial execution), governance gates intentionally require human approval — and this is a feature, not a flaw.
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section>
+  <div class="container">
+    <div class="section-label">07 — Competitive Context</div>
+    <h2>Paperclip vs. Alternatives</h2>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Paperclip</th>
+          <th>n8n / Make</th>
+          <th>AutoGPT</th>
+          <th>Asana + OpenClaw</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Org chart / hierarchy</td>
+          <td class="check">✅ Native</td>
+          <td class="cross">❌</td>
+          <td class="cross">❌</td>
+          <td class="warn">⚠️ Manual</td>
+        </tr>
+        <tr>
+          <td>Goal alignment (mission → task)</td>
+          <td class="check">✅ First-class</td>
+          <td class="cross">❌</td>
+          <td class="warn">⚠️ Prompt-only</td>
+          <td class="warn">⚠️ Manual</td>
+        </tr>
+        <tr>
+          <td>Budget governance per agent</td>
+          <td class="check">✅ Atomic</td>
+          <td class="warn">⚠️ Partial</td>
+          <td class="cross">❌</td>
+          <td class="cross">❌</td>
+        </tr>
+        <tr>
+          <td>Heartbeat scheduling</td>
+          <td class="check">✅ Built-in</td>
+          <td class="check">✅ Built-in</td>
+          <td class="cross">❌</td>
+          <td class="warn">⚠️ Via OpenClaw</td>
+        </tr>
+        <tr>
+          <td>Multi-company isolation</td>
+          <td class="check">✅ Native</td>
+          <td class="warn">⚠️ Separate instances</td>
+          <td class="cross">❌</td>
+          <td class="warn">⚠️ Multi-account</td>
+        </tr>
+        <tr>
+          <td>Agent session persistence</td>
+          <td class="check">✅ Built-in</td>
+          <td class="cross">❌</td>
+          <td class="warn">⚠️ Partial</td>
+          <td class="check">✅ Via OpenClaw</td>
+        </tr>
+        <tr>
+          <td>Immutable audit log</td>
+          <td class="check">✅ Append-only</td>
+          <td class="warn">⚠️ Logs only</td>
+          <td class="cross">❌</td>
+          <td class="cross">❌</td>
+        </tr>
+        <tr>
+          <td>Self-hosted + open source</td>
+          <td class="check">✅ MIT</td>
+          <td class="warn">⚠️ n8n CE only</td>
+          <td class="check">✅ MIT</td>
+          <td class="cross">❌ SaaS</td>
+        </tr>
+        <tr>
+          <td>OpenClaw native integration</td>
+          <td class="check">✅ Named explicitly</td>
+          <td class="warn">⚠️ Via HTTP</td>
+          <td class="cross">❌</td>
+          <td class="check">✅ Native</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- MASTER RELEVANCE -->
+<section>
+  <div class="container">
+    <div class="section-label">08 — Strategic Relevance for Master</div>
+    <h2>What This Means for Christopher's Ventures</h2>
+
+    <div class="highlight-box">
+      <h3>🦞 Baron's Assessment</h3>
+      <p>Paperclip is <strong>purpose-built for the architecture Master is already building toward</strong>. Multiple ventures (CopilotHQ, ProntoCall, SunburntAI, AnyoneAI), each with distinct agent teams, all orchestrated from a single control plane. This is literally what Paperclip was designed for.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon">🤙</div>
+        <h4>ProntoCall — Immediate Fit</h4>
+        <p>A Paperclip company with: Voice Agent (Vapi), Lead Processor (n8n), CRM Updater (OpenClaw), Follow-up Agent. Budget-governed. Heartbeat-driven. Zero human required for 24/7 lead capture.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">☀️</div>
+        <h4>SunburntAI — GTM Execution Engine</h4>
+        <p>A Paperclip company to run the GTM week plan: Content Writer (OpenClaw), SEO Analyst, LinkedIn Outreach Agent, Analytics Tracker. Human (Master) = board. Approves strategy weekly.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏗</div>
+        <h4>AnyoneAI — The Meta Play</h4>
+        <p>AnyoneAI's vision of "automating the n8n agency workflow" is essentially Paperclip + domain specialisation. Use Paperclip as the backbone. Differentiate on pre-built ClipMart templates for n8n agencies.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💼</div>
+        <h4>CopilotHQ — Client Delivery</h4>
+        <p>Offer Paperclip-powered AI company deployments as a service. Set up autonomous operations for clients. Master oversees as board. This is a productised offering with real differentiation.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:40px;margin-bottom:16px;">Recommended Next Actions</h3>
+    <div class="pill-list">
+      <span class="pill blue">1. Install Paperclip locally: <code>npx paperclipai onboard --yes</code></span>
+      <span class="pill green">2. Create a ProntoCall company — wire OpenClaw as Ops Agent</span>
+      <span class="pill purple">3. Create a SunburntAI company — run the GTM Week 1 plan through it</span>
+      <span class="pill blue">4. Join Paperclip Discord — position Master as a power user / contributor</span>
+      <span class="pill green">5. Build a CopilotHQ client template for ClipMart (first-mover advantage)</span>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL VERDICT -->
+<section>
+  <div class="container">
+    <div class="section-label">09 — Final Verdict</div>
+    <h2>The Claw's Ruling</h2>
+
+    <div class="callout" style="font-size:1.1rem;border-color:var(--accent2)">
+      <strong>Paperclip is the missing operating system layer for serious multi-agent builders.</strong><br><br>
+      It does not replace agent runtimes like OpenClaw or Claude Code — it promotes them from contractors to employees. From scattered scripts to a structured company. From babysitting to board-level oversight.<br><br>
+      For a purely agentic organisation with minimal human input: <strong>architecturally yes, operationally not quite yet at scale</strong> — but it's the closest thing that exists. For low-complexity, repeatable operations running today, it's viable now. For strategic, high-stakes work, it correctly keeps humans in the loop as board members, not babysitters.<br><br>
+      The framework is early but moving fast. The community is large and active. The vision is correct. The timing is right.
+    </div>
+
+    <div class="grid-4">
+      <div class="infographic-stat">
+        <div class="stat-num" style="color:var(--accent3)">YES</div>
+        <div class="stat-label">Right architecture for zero-human ops</div>
+      </div>
+      <div class="infographic-stat">
+        <div class="stat-num">⚡</div>
+        <div class="stat-label">OpenClaw is a first-class agent runtime</div>
+      </div>
+      <div class="infographic-stat">
+        <div class="stat-num">🦞</div>
+        <div class="stat-label">Baron Von Claw should be CMO/Ops in every company</div>
+      </div>
+      <div class="infographic-stat">
+        <div class="stat-num" style="color:var(--warn)">NOW</div>
+        <div class="stat-label">Install it. Test it. Build your first agentic company.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <p>🦞 <strong>Baron Von Claw Research Division</strong></p>
+  <p>Generated: 24 March 2026 · Model: Claude Sonnet 4.6 · Images: DALL-E 3</p>
+  <p><a href="https://github.com/paperclipai/paperclip">github.com/paperclipai/paperclip</a> · <a href="https://paperclip.ing/docs">paperclip.ing/docs</a> · <a href="https://discord.gg/m4HZY7xNG3">Discord</a></p>
+  <p style="margin-top:12px;font-size:0.7rem;color:var(--muted)">Stored at /root/clawd/store/research/paperclip-research-report.html</p>
+</div>
+
+</body>
+</html>
