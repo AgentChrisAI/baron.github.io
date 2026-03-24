@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spec-Kit Deep Dive — Baron Von Claw</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="lobster">🦞</div>
+      <div>
+        <div class="brand">Baron Von Claw</div>
+        <div class="sub">Document Store</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Navigation</div>
+      <div class="sidebar-nav">
+        <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🔬 Research</div>
+      <div class="sidebar-nav">
+        <a href="../research/spec-kit-brief.html"><span class="icon">📋</span> Spec-Kit Brief</a>
+        <a href="../research/spec-kit-deep-dive.html"><span class="icon">🔍</span> Deep Dive</a>
+        <a href="../research/spec-kit-application.html"><span class="icon">🎯</span> Application Analysis</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🎯 Strategy</div>
+      <div class="sidebar-nav">
+        <a href="../strategy/sunburntai-gtm.html"><span class="icon">🔥</span> SunburntAI GTM</a>
+        <a href="../strategy/godfather-offer.html"><span class="icon">💎</span> Godfather Offer</a>
+        <a href="../strategy/icp-framework.html"><span class="icon">👤</span> ICP Framework</a>
+        <a href="../strategy/psychological-conversion.html"><span class="icon">🧠</span> Psych Conversion</a>
+        <a href="../strategy/linkedin.html"><span class="icon">💼</span> LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🏗️ Infrastructure</div>
+      <div class="sidebar-nav">
+        <a href="../infrastructure/vps-plan.html"><span class="icon">🖥️</span> VPS Plan</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">Spec-Kit Deep Dive</div>
+      <div class="topbar-meta"><a href="../index.html" style="color:var(--accent);text-decoration:none;">← Back to Index</a></div>
+    </div>
+    <div class="content">
+      <div class="page-header">
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Research / Spec-Kit Deep Dive</div>
+      </div>
+      <div class="prose">
+<h1>Agent 1 Research Report: Spec-Kit Deep Dive</h1>
+
+<p><strong>Date:</strong> 2026-03-23  </p>
+<p><strong>Agent:</strong> Baron Von Claw (Subagent — Research)  </p>
+<p><strong>Sources:</strong> github/spec-kit repo (live), spec-driven.md, extensions/README.md, presets/README.md, all template files, GitHub API tree</p>
+
+<hr>
+
+<h2>Summary</h2>
+
+<p>GitHub's <code>spec-kit</code> (aka <code>specify-cli</code>) is a mature, production-ready CLI toolkit that operationalises Spec-Driven Development — a methodology where <strong>specifications are the source of truth and code is the generated output</strong>. It ships with structured markdown templates, AI slash commands for every phase, and a growing extension/preset ecosystem. The core workflow (constitution → specify → clarify → plan → tasks → implement) maps surprisingly well to how Baron Von Claw already operates. Crucially: it's <strong>technology-agnostic in philosophy</strong> — there is nothing in the architecture that prevents non-code artifact targets (JSON workflows, Vapi configs), though the default templates and community examples lean heavily toward traditional software. The preset community catalog is currently empty (new system), while the extension catalog has 22+ community entries including Jira and Azure DevOps integrations.</p>
+
+<hr>
+
+<h2>Key Findings</h2>
+
+<h3>Finding 1: The Full <code>.specify/</code> Directory Structure</h3>
+
+<p>After running <code>specify init &lt;PROJECT_NAME&gt; --ai claude</code>, the project directory looks like this:</p>
+
+<pre><code>.specify/
+├── memory/
+│   └── constitution.md              # Governing principles (output of /speckit.constitution)
+├── scripts/
+│   ├── check-prerequisites.sh
+│   ├── common.sh
+│   ├── create-new-feature.sh        # Auto-runs on /speckit.specify
+│   ├── setup-plan.sh                # Auto-runs on /speckit.plan
+│   └── update-agent-context.sh     # Updates CLAUDE.md etc.
+├── specs/
+│   └── 001-[feature-name]/          # Created per feature, numbered sequentially
+│       ├── spec.md                  # Output of /speckit.specify
+│       ├── plan.md                  # Output of /speckit.plan
+│       ├── research.md              # Output of /speckit.plan (parallel research)
+│       ├── data-model.md            # Output of /speckit.plan
+│       ├── quickstart.md            # Output of /speckit.plan
+│       ├── tasks.md                 # Output of /speckit.tasks
+│       └── contracts/               # API specs, event contracts, etc.
+│           ├── api-spec.json
+│           └── [other-contracts].md
+└── templates/
+    ├── spec-template.md
+    ├── plan-template.md
+    ├── tasks-template.md
+    └── constitution-template.md
+
+.claude/
+└── commands/
+    ├── speckit.constitution.md
+    ├── speckit.specify.md
+    ├── speckit.clarify.md
+    ├── speckit.plan.md
+    ├── speckit.tasks.md
+    ├── speckit.implement.md
+    ├── speckit.analyze.md
+    ├── speckit.checklist.md
+    └── speckit.taskstoissues.md
+
+CLAUDE.md                            # Auto-generated agent context file</code></pre>
+
+<p>Key structural points:</p>
+<ul>
+<li>Every feature gets its own <strong>numbered directory</strong> under <code>specs/</code></li>
+<li>Every feature gets its own <strong>git branch</strong> (e.g., <code>001-chat-system</code>)</li>
+<li>The <code>.claude/commands/</code> directory contains the actual slash command definitions</li>
+<li><code>research.md</code> and <code>contracts/</code> are generated as part of the planning phase, not separately</li>
+</ul>
+
+<hr>
+
+<h3>Finding 2: The Default Templates (Actual Content)</h3>
+
+<h4>spec-template.md</h4>
+
+<p>This is what <code>spec.md</code> is based on — the output of <code>/speckit.specify</code>:</p>
+
+<pre><code># Feature Specification: [FEATURE NAME]
+
+**Feature Branch**: `[###-feature-name]`  
+**Created**: [DATE]  
+**Status**: Draft  
+**Input**: User description: "$ARGUMENTS"
+
+## User Scenarios &amp; Testing *(mandatory)*
+
+### User Story 1 - [Brief Title] (Priority: P1)
+
+[Describe this user journey in plain language]
+
+**Why this priority**: [Explain the value...]
+**Independent Test**: [How this can be tested independently]
+
+**Acceptance Scenarios**:
+1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+
+---
+
+### Edge Cases
+- What happens when [boundary condition]?
+- How does system handle [error scenario]?
+
+## Requirements *(mandatory)*
+
+### Functional Requirements
+
+- **FR-001**: System MUST [specific capability]
+- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method?]
+
+### Key Entities *(include if feature involves data)*
+- **[Entity 1]**: [What it represents, key attributes without implementation]
+
+## Success Criteria *(mandatory)*
+
+### Measurable Outcomes
+- **SC-001**: [Measurable metric]
+- **SC-002**: [Measurable metric]</code></pre>
+
+<p><strong>Critical design decision:</strong> The spec template explicitly forces:</p>
+<ul>
+<li><span style="color:#4caf7d">✅</span> Focus on WHAT users need and WHY</li>
+<li><span style="color:#e85252">❌</span> Avoid HOW to implement (no tech stack, APIs, code structure)</li>
+<li><code>[NEEDS CLARIFICATION: ...]</code> markers when anything is ambiguous (prevents LLM guessing)</li>
+</ul>
+
+<h4>plan-template.md</h4>
+
+<p>The output of <code>/speckit.plan</code> — where tech stack enters:</p>
+
+<pre><code># Implementation Plan: [FEATURE]
+
+**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
+
+## Summary
+[Primary requirement + technical approach from research]
+
+## Technical Context
+**Language/Version**: [e.g., Python 3.11 or NEEDS CLARIFICATION]  
+**Primary Dependencies**: [e.g., FastAPI or NEEDS CLARIFICATION]  
+**Storage**: [if applicable]  
+**Testing**: [e.g., pytest]  
+**Target Platform**: [e.g., Linux server]
+**Project Type**: [library/cli/web-service/mobile-app/compiler]  
+**Performance Goals**: [domain-specific]  
+**Constraints**: [&lt;200ms p95, &lt;100MB memory]
+
+## Constitution Check
+*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+[Gates determined based on constitution file]
+
+## Project Structure
+### Documentation (this feature)</code></pre>
+<p>specs/[###-feature]/</p>
+<p>├── plan.md</p>
+<p>├── research.md</p>
+<p>├── data-model.md</p>
+<p>├── quickstart.md</p>
+<p>├── contracts/</p>
+<p>└── tasks.md</p>
+<pre><code>
+## Complexity Tracking
+&gt; **Fill ONLY if Constitution Check has violations that must be justified**
+
+| Violation | Why Needed | Simpler Alternative Rejected Because |
+|---|---|---|</code></pre>
+
+<h4>tasks-template.md</h4>
+
+<p>The output of <code>/speckit.tasks</code> — executable task list:</p>
+
+<pre><code># Tasks: [FEATURE NAME]
+
+**Input**: Design documents from `/specs/[###-feature-name]/`
+**Prerequisites**: plan.md (required), spec.md, research.md, data-model.md, contracts/
+
+## Format: `[ID] [P?] [Story] Description`
+- **[P]**: Can run in parallel (different files, no dependencies)
+- **[Story]**: Which user story this task belongs to (e.g., US1, US2)
+
+## Phase 1: Setup (Shared Infrastructure)
+- [ ] T001 Create project structure per implementation plan
+- [ ] T002 Initialize [language] project with [framework] dependencies
+- [ ] T003 [P] Configure linting and formatting tools
+
+## Phase 2: Foundational (Blocking Prerequisites)
+⚠️ CRITICAL: No user story work can begin until this phase is complete
+- [ ] T004 Setup database schema and migrations framework
+- [ ] T005 [P] Implement authentication/authorization framework
+
+## Phase 3: User Story 1 - [Title] (Priority: P1) 🎯 MVP
+**Goal**: [What this story delivers]
+**Independent Test**: [How to verify this story works on its own]
+
+### Tests (OPTIONAL - only if tests requested) ⚠️
+&gt; **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
+
+### Implementation
+- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
+- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
+
+**Checkpoint**: At this point, User Story 1 should be fully functional and testable independently</code></pre>
+
+<h4>constitution-template.md</h4>
+
+<p>The governance layer — created by <code>/speckit.constitution</code>:</p>
+
+<pre><code># [PROJECT_NAME] Constitution
+
+## Core Principles
+
+### [PRINCIPLE_1_NAME]
+[PRINCIPLE_1_DESCRIPTION]
+
+### [PRINCIPLE_2_NAME]
+[PRINCIPLE_2_DESCRIPTION]
+
+### [PRINCIPLE_3_NAME]
+[PRINCIPLE_3_DESCRIPTION]
+
+## [SECTION_2_NAME]
+[SECTION_2_CONTENT]
+
+## Governance
+[GOVERNANCE_RULES]
+
+**Version**: [VERSION] | **Ratified**: [DATE] | **Last Amended**: [DATE]</code></pre>
+
+<p>The constitution template is intentionally minimal — the <code>/speckit.constitution</code> command fills it from the user's principles. The <code>spec-driven.md</code> doc describes nine canonical articles used in the spec-kit's own constitution: Library-First, CLI Interface, Test-First (non-negotiable), Integration Testing, Observability, Versioning, Simplicity (≤3 projects), Anti-Abstraction (use frameworks directly), and Integration-First Testing.</p>
+
+<hr>
+
+<h3>Finding 3: Extensions — What Exists, What's Available</h3>
+
+<p><strong>Extension system:</strong> Extensions add <strong>new capabilities</strong> — new slash commands, new templates, integrations with external platforms. They are installed via:</p>
+
+<pre><code>specify extension add &lt;name&gt;         # From catalog
+specify extension add --from &lt;url&gt;   # Direct from GitHub zip</code></pre>
+
+<p><strong>22 community extensions in catalog.community.json:</strong></p>
+
+<table>
+<tr><th>Extension</th><th>Category</th><th>Purpose</th><th>Relevance to Master</th></tr>
+<tr><td><strong>Jira Integration</strong></td><td>integration</td><td>Creates Jira Epics, Stories, Issues from spec-kit tasks</td><td>⭐ High — client delivery</td></tr>
+<tr><td><strong>Azure DevOps Integration</strong></td><td>integration</td><td>Sync user stories/tasks to Azure DevOps</td><td>Medium</td></tr>
+<tr><td><strong>Fleet Orchestrator</strong></td><td>process</td><td>Full feature lifecycle with human-in-the-loop gates</td><td>⭐ High — agentic pipeline</td></tr>
+<tr><td><strong>Conduct Extension</strong></td><td>process</td><td>Orchestrates spec-kit phases via sub-agent delegation</td><td>⭐ High — context isolation</td></tr>
+<tr><td><strong>Cognitive Squad</strong></td><td>docs</td><td>Multi-agent cognitive system with quality gates</td><td>⭐ High — research pattern</td></tr>
+<tr><td><strong>Spec Sync</strong></td><td>docs</td><td>Detect/resolve drift between specs and implementation</td><td>Medium</td></tr>
+<tr><td><strong>Retrospective Extension</strong></td><td>docs</td><td>Post-implementation spec adherence scoring</td><td>Medium</td></tr>
+<tr><td><strong>Verify Extension</strong></td><td>code</td><td>Validates implemented code against spec artifacts</td><td>High</td></tr>
+<tr><td><strong>Review Extension</strong></td><td>code</td><td>Multi-agent code review (quality, tests, error handling)</td><td>High</td></tr>
+<tr><td><strong>Cleanup Extension</strong></td><td>code</td><td>Post-implementation quality gate, fixes small issues</td><td>High</td></tr>
+<tr><td><strong>Archive Extension</strong></td><td>docs</td><td>Archives merged features into main project memory</td><td>Medium</td></tr>
+<tr><td><strong>Reconcile Extension</strong></td><td>docs</td><td>Surgically updates feature artifacts to fix drift</td><td>Medium</td></tr>
+<tr><td><strong>Understanding</strong></td><td>docs</td><td>31-metric requirements quality analysis (IEEE/ISO)</td><td>Medium</td></tr>
+<tr><td><strong>V-Model Extension Pack</strong></td><td>docs</td><td>Paired dev/test specs with full traceability</td><td>Medium</td></tr>
+<tr><td><strong>DocGuard</strong></td><td>docs</td><td>Canonical-Driven Development enforcement</td><td>Low</td></tr>
+<tr><td><strong>Iterate</strong></td><td>docs</td><td>Refine specs mid-implementation</td><td>Medium</td></tr>
+<tr><td><strong>Learning Extension</strong></td><td>docs</td><td>Generate educational guides from implementations</td><td>Low</td></tr>
+<tr><td><strong>SDD Utilities</strong></td><td>process</td><td>Resume interrupted workflows, validate health</td><td>High</td></tr>
+<tr><td><strong>Project Health Check</strong></td><td>visibility</td><td>Diagnose project health across structure/agents/features</td><td>High</td></tr>
+<tr><td><strong>Project Status</strong></td><td>visibility</td><td>Show current SDD workflow progress</td><td>Medium</td></tr>
+<tr><td><strong>Ralph Loop</strong></td><td>code</td><td>Autonomous implementation loop using AI agent CLI</td><td>⭐ High — AnyoneAI</td></tr>
+<tr><td><strong>Verify Tasks Extension</strong></td><td>code</td><td>Detect phantom completions (tasks marked done without impl)</td><td>High</td></tr>
+</table>
+
+<p><strong>Key finding for Master:</strong> </p>
+<ul>
+<li><span style="color:#4caf7d">✅</span> <strong>Jira integration exists</strong> — <code>spec-kit-jira</code> by mbachorik</li>
+<li><span style="color:#4caf7d">✅</span> <strong>GitHub Issues integration</strong> is built-in via <code>/speckit.taskstoissues</code> (uses GitHub MCP server)</li>
+<li><span style="color:#4caf7d">✅</span> <strong>Sub-agent delegation</strong> exists (<code>Conduct Extension</code>) — mirrors Baron Von Claw's pattern</li>
+<li><span style="color:#4caf7d">✅</span> <strong>Multi-agent research pattern</strong> exists (<code>Cognitive Squad</code>) — formalized version of existing approach</li>
+</ul>
+
+<hr>
+
+<h3>Finding 4: Presets — How They Work, What Exists</h3>
+
+<p><strong>Preset system:</strong> Presets <strong>customize</strong> how spec-kit works — they override templates and commands without adding new functionality. Resolution stack (highest to lowest priority):</p>
+
+<pre><code>.specify/templates/overrides/           ← Project-local one-off overrides
+.specify/presets/&lt;preset-id&gt;/templates/ ← Installed presets
+.specify/extensions/&lt;ext-id&gt;/templates/ ← Extension-provided templates
+.specify/templates/                     ← Core templates</code></pre>
+
+<p><strong>Key design features:</strong></p>
+<ul>
+<li>Presets are <strong>stackable</strong> with explicit priority ordering</li>
+<li>Template resolution happens <strong>at runtime</strong> (not merged at install)</li>
+<li>Command overrides applied <strong>at install time</strong> and written to agent directories</li>
+<li>Multiple presets can coexist (e.g., <code>enterprise-safe</code> at priority 10, <code>healthcare-compliance</code> at priority 5)</li>
+</ul>
+
+<p><strong>Community preset catalog status: EMPTY (as of 2026-03-09)</strong></p>
+
+<p>The <code>presets/catalog.community.json</code> currently returns <code>{"presets": {}}</code>. The preset system is newer than the extension system and the community hasn't built presets yet.</p>
+
+<p><strong>However — the pirate-speak demo shows the full power:</strong></p>
+
+<p>From the <a href="https://github.com/mnriem/spec-kit-pirate-speak-preset-demo">pirate-speak demo</a>:</p>
+<ul>
+<li>Specifications become "Voyage Manifests"</li>
+<li>Plans become "Battle Plans"</li>
+<li>Tasks become "Crew Assignments"</li>
+<li>Everything generated in full pirate vernacular</li>
+<li><strong>Zero tooling changes</strong> — just template overrides</li>
+</ul>
+
+<p><strong>Implication for Master:</strong> This is a <strong>greenfield opportunity</strong>. An <code>n8n-workflow</code> preset or <code>vapi-voice-agent</code> preset would be first-mover. Building one would be straightforward (copy scaffold, edit <code>preset.yml</code>, override <code>spec-template.md</code>, <code>plan-template.md</code>, <code>tasks-template.md</code>).</p>
+
+<p><strong>Preset CLI:</strong></p>
+
+<pre><code>specify preset search                              # Browse community catalog
+specify preset add healthcare-compliance           # Install by name
+specify preset add --dev ./my-n8n-preset           # Install from local dir (for development)
+specify preset add enterprise-safe --priority 10   # Set priority
+specify preset resolve spec-template               # See which template wins
+specify preset list                                # List installed
+specify preset remove &lt;name&gt;                       # Remove</code></pre>
+
+<hr>
+
+<h3>Finding 5: Git/Branch Workflow Integration</h3>
+
+<p>The branching workflow is tightly integrated:</p>
+
+<p><strong>Branch naming:</strong></p>
+<ul>
+<li>Default: sequential numbering → <code>001-feature-name</code>, <code>002-next-feature</code>, <code>003-chat-system</code></li>
+<li>Alternative: timestamp-based → <code>20260323-141523-feature-name</code> (for distributed teams avoiding conflicts)</li>
+</ul>
+
+<p><strong>Configured at init:</strong></p>
+<pre><code>specify init my-project --ai claude --branch-numbering sequential   # default
+specify init my-project --ai claude --branch-numbering timestamp    # for teams</code></pre>
+
+<p><strong>Non-git mode:</strong> If git is not desired, <code>--no-git</code> skips repo initialization. The <code>SPECIFY_FEATURE</code> env var allows working with a specific feature without git branches:</p>
+
+<pre><code>export SPECIFY_FEATURE=001-my-feature   # Override feature detection</code></pre>
+
+<p><strong>Workflow lifecycle:</strong></p>
+<ol>
+<li><code>/speckit.specify</code> → triggers <code>create-new-feature.sh</code> → creates branch + spec directory</li>
+<li>Each feature lives on its own branch with its own <code>specs/###-feature-name/</code> directory</li>
+<li><code>/speckit.plan</code> → triggers <code>setup-plan.sh</code> → populates plan.md, research.md, contracts/</li>
+<li><code>/speckit.taskstoissues</code> → creates GitHub Issues from tasks (requires GitHub MCP server)</li>
+<li>Normal git flow: commit spec changes alongside code, merge feature branch to main</li>
+</ol>
+
+<p><strong>The pattern mirrors how experienced engineering teams work</strong> — specs as PRs, code following from specs.</p>
+
+<hr>
+
+<h3>Finding 6: What's in <code>spec-driven.md</code> — Full Methodology</h3>
+
+<p><code>spec-driven.md</code> is the authoritative philosophy document. Key sections:</p>
+
+<p><strong>The Power Inversion:</strong></p>
+<blockquote>"Spec-Driven Development inverts the power structure. Specifications don't serve code — code serves specifications."</blockquote>
+
+<p>The core thesis: traditional specs were scaffolding discarded once "real work" began. SDD makes specs <strong>executable</strong> — they generate implementation rather than merely guiding it. "The lingua franca of development moves to a higher level, and code is the last-mile approach."</p>
+
+<p><strong>The Nine Constitutional Articles (from the default spec-kit constitution):</strong></p>
+
+<ol>
+<li><strong>Article I — Library-First</strong>: Every feature must begin as a standalone library</li>
+<li><strong>Article II — CLI Interface Mandate</strong>: Every library must expose via CLI (text in/out, JSON support)</li>
+<li><strong>Article III — Test-First Imperative</strong>: NON-NEGOTIABLE. Tests written → approved → confirmed failing → THEN implement</li>
+<li><strong>Articles IV-VI</strong>: Integration testing, observability, versioning</li>
+<li><strong>Article VII — Simplicity</strong>: Maximum 3 projects for initial implementation; justify any more</li>
+<li><strong>Article VIII — Anti-Abstraction</strong>: Use framework directly; single model representation</li>
+<li><strong>Article IX — Integration-First Testing</strong>: Real databases over mocks, actual service instances over stubs</li>
+</ol>
+
+<p><strong>Why SDD now (3 reasons given):</strong></p>
+<ol>
+<li>AI capabilities crossed the threshold for reliable spec-to-code generation</li>
+<li>Software complexity grows exponentially — systematic alignment requires spec-first</li>
+<li>Pace of change demands pivoting as normal workflow, not exceptional event</li>
+</ol>
+
+<p><strong>Template constraints on LLMs (the real mechanism):</strong></p>
+<ul>
+<li>Specs explicitly instruct: <span style="color:#4caf7d">✅</span> Focus on WHAT, <span style="color:#e85252">❌</span> Avoid HOW</li>
+<li><code>[NEEDS CLARIFICATION]</code> markers prevent LLM assumption-making</li>
+<li>Checklists act as "unit tests" for spec quality</li>
+<li>Constitution compliance gates prevent over-engineering</li>
+<li>"Phase -1 gates" for simplicity (≤3 projects?) and anti-abstraction (using framework directly?)</li>
+<li>Test-first ordering embedded in task creation</li>
+</ul>
+
+<p><strong>SDD lifecycle phases:</strong></p>
+<ul>
+<li>0-to-1 (Greenfield): Generate from scratch</li>
+<li>Creative Exploration: Parallel implementations from same spec</li>
+<li>Iterative Enhancement (Brownfield): Add features to existing codebases</li>
+</ul>
+
+<hr>
+
+<h3>Finding 7: Claude Code Integration — Slash Commands Exposed</h3>
+
+<p>Claude Code is fully supported. After <code>specify init --ai claude</code>, these slash commands are available in <code>.claude/commands/</code>:</p>
+
+<p><strong>Core SDD workflow commands:</strong></p>
+
+<table>
+<tr><th>Command</th><th>Purpose</th><th>What It Does</th></tr>
+<tr><td><code>/speckit.constitution</code></td><td>Create/update governing principles</td><td>Writes <code>.specify/memory/constitution.md</code></td></tr>
+<tr><td><code>/speckit.specify</code></td><td>Define what to build</td><td>Runs <code>create-new-feature.sh</code>, creates branch, creates <code>spec.md</code></td></tr>
+<tr><td><code>/speckit.clarify</code></td><td>Clarify ambiguities</td><td>Sequential coverage-based questioning, adds Clarifications section to spec</td></tr>
+<tr><td><code>/speckit.plan</code></td><td>Technical implementation plan</td><td>Runs <code>setup-plan.sh</code>, creates <code>plan.md</code>, <code>research.md</code>, <code>data-model.md</code>, <code>contracts/</code>, <code>quickstart.md</code></td></tr>
+<tr><td><code>/speckit.tasks</code></td><td>Generate task list</td><td>Creates <code>tasks.md</code> with parallelization markers</td></tr>
+<tr><td><code>/speckit.implement</code></td><td>Execute all tasks</td><td>Validates prerequisites, parses tasks.md, executes in dependency order</td></tr>
+</table>
+
+<p><strong>Quality and validation commands:</strong></p>
+
+<table>
+<tr><th>Command</th><th>Purpose</th></tr>
+<tr><td><code>/speckit.analyze</code></td><td>Cross-artifact consistency &amp; coverage analysis (run after tasks, before implement)</td></tr>
+<tr><td><code>/speckit.checklist</code></td><td>Generate custom quality checklists ("unit tests for English")</td></tr>
+<tr><td><code>/speckit.taskstoissues</code></td><td>Convert tasks to GitHub Issues (requires GitHub MCP server)</td></tr>
+</table>
+
+<p><strong>How it works technically:</strong></p>
+
+<p>Each <code>.claude/commands/speckit.*.md</code> file is a prompt template. When Claude Code runs <code>/speckit.specify "Build a chat feature"</code>, it:</p>
+<ol>
+<li>Reads the command file</li>
+<li>Executes the associated bash/PowerShell script via <code>{SCRIPT}</code> placeholder</li>
+<li>Uses template files from <code>.specify/templates/</code></li>
+<li>Creates the appropriate output files</li>
+</ol>
+
+<p>The scripts handle git operations (branch creation, etc.) while Claude handles AI generation.</p>
+
+<p><strong>Note for Codex CLI:</strong> Different invocation — <code>$speckit-specify</code> (skills mode, not slash commands).</p>
+
+<hr>
+
+<h3>Finding 8: Can Spec-Kit Be Used for Non-Code Projects?</h3>
+
+<p><strong>Short answer: Yes, philosophically. Mechanically — with adaptation.</strong></p>
+
+<p><strong>What works out of the box:</strong></p>
+<ul>
+<li>The methodology is explicitly described as <strong>"not tied to specific technologies, programming languages, or frameworks"</strong></li>
+<li>Specs focus on WHAT, not HOW — which is equally valid for n8n workflow JSON or Vapi configs</li>
+<li>The constitution and specify phases are purely natural language and technology-agnostic</li>
+<li>The <code>/speckit.plan</code> phase can specify non-code targets — <code>plan.md</code> just captures your tech context</li>
+</ul>
+
+<p><strong>What requires adaptation:</strong></p>
+
+<p>The default templates assume code-first deliverables:</p>
+<ul>
+<li><code>tasks-template.md</code> references <code>src/</code>, <code>tests/</code>, code file paths</li>
+<li><code>contracts/</code> assumes API specs (JSON schemas, REST endpoints)</li>
+<li>The <code>/speckit.implement</code> command assumes an AI agent that writes code files</li>
+</ul>
+
+<p><strong>For n8n workflows specifically:</strong></p>
+<ul>
+<li><code>spec.md</code> → Define the automation: user stories like "Given a lead form submission, When Typeform webhook fires, Then create contact in HubSpot and send welcome email"</li>
+<li><code>plan.md</code> → Specify: n8n workflow JSON structure, node types, credential names, error handling patterns</li>
+<li><code>contracts/</code> → Define trigger schemas, API payloads, expected output format</li>
+<li><code>tasks.md</code> → Tasks like "T001: Create Webhook trigger node", "T002: Add HubSpot node with field mapping"</li>
+<li>The AI agent (Claude Code) can generate n8n workflow JSON as deliverable</li>
+</ul>
+
+<p><strong>Precedent:</strong> The brownfield demos work with Go, Java, .NET — the methodology proved portable. Non-code artifacts are a natural extension. A custom <strong>preset</strong> could override <code>spec-template.md</code> to use n8n-specific terminology and structure.</p>
+
+<p><strong>The gap:</strong> There's no built-in "deploy" or "test" mechanism for non-code artifacts. <code>/speckit.implement</code> works by having Claude write code. For n8n JSON, you'd need the AI to produce the JSON file and either a manual import step or a custom extension that calls n8n's API to deploy.</p>
+
+<hr>
+
+<h3>Finding 9: What <code>research.md</code> Looks Like</h3>
+
+<p><code>research.md</code> is generated during the <code>/speckit.plan</code> phase. The <code>spec-driven.md</code> describes exactly how it's produced:</p>
+
+<blockquote>"Research agents gather critical context. They investigate library compatibility, performance benchmarks, and security implications."</blockquote>
+
+<p><strong>Contents (from the detailed walkthrough):</strong></p>
+<pre><code># Research: [Feature Name]
+
+## Tech Stack Validation
+[AI-researched findings on chosen technologies]
+
+## Library Comparisons
+- WebSocket options: ws vs socket.io vs... [comparisons]
+- PostgreSQL driver: pg vs prisma vs... [trade-offs]
+
+## Version-Specific Notes
+- .NET Aspire v0.x breaking changes in routing
+- Specific version of [framework] used in this project
+
+## Security Implications
+[Security considerations for chosen stack]
+
+## Performance Benchmarks
+[Relevant benchmarks for tech choices]
+
+## Organizational Constraints Applied
+[How company standards/preferences were incorporated]</code></pre>
+
+<p><strong>From the Taskify walkthrough, the user explicitly asked Claude to:</strong></p>
+<blockquote>"spawn parallel research tasks to clarify any details using research from the web"</blockquote>
+
+<p>This matches exactly how Baron Von Claw already operates — parallel research sub-agents, targeted questions, structured findings. <strong>The <code>research.md</code> file is essentially what our research reports already produce.</strong> The key difference: spec-kit formalizes this as a named artifact in a structured directory, linked to a specific feature spec.</p>
+
+<p><strong>For our research agent pattern:</strong></p>
+<ul>
+<li>The spec-kit pattern of parallel research sub-agents is validated by the methodology</li>
+<li>The <code>research.md</code> artifact could be adopted independently (without full spec-kit) as a standard research output format</li>
+<li>The "Cognitive Squad" extension formalizes multi-agent research with quality gates</li>
+</ul>
+
+<hr>
+
+<h3>Finding 10: Limitations — What Spec-Kit Does NOT Do Well</h3>
+
+<p><strong>1. Preset ecosystem is immature (currently empty)</strong></p>
+<p>The community preset catalog has zero entries as of March 2026. Extensions are more developed. Anyone building presets is a first-mover.</p>
+
+<p><strong>2. Heavy code-software orientation in defaults</strong></p>
+<p>Default templates, examples, and community walkthroughs are 100% software code projects. Non-code artifact targets (n8n JSON, Vapi configs) require template customization. No built-in guidance for this use case.</p>
+
+<p><strong>3. No built-in feedback loop from runtime to spec</strong></p>
+<p>The <code>spec-driven.md</code> describes a vision where "production metrics and incidents update specifications." In practice, this is manual — there's no tooling to auto-update specs from production data.</p>
+
+<p><strong>4. Requires developer toolchain setup</strong></p>
+<p>Dependencies: Python 3.11+, uv (package manager), git, an AI agent CLI. Not trivially adopted by non-technical stakeholders. Installation is via <code>uv tool install specify-cli --from git+...</code>.</p>
+
+<p><strong>5. The "implement" phase can be agent-unstable</strong></p>
+<p>From the Taskify demo, the walkthrough explicitly warns: "Claude Code might be over-eager and add components that you did not ask for." Human review is needed at multiple checkpoints. This is not fully autonomous.</p>
+
+<p><strong>6. Context pollution is a known problem</strong></p>
+<p>The <code>Conduct Extension</code> exists specifically to address context pollution from running all spec-kit phases in one session. Long sessions degrade AI quality — this is an inherent LLM limitation that spec-kit doesn't solve, just works around.</p>
+
+<p><strong>7. Sequential task execution is naive for complex parallel builds</strong></p>
+<p>The <code>[P]</code> parallelization markers in tasks.md identify parallel opportunities but the default implement command executes sequentially. Actual parallel execution requires the <code>Fleet Orchestrator</code> or <code>Ralph Loop</code> extensions.</p>
+
+<p><strong>8. No native state management between sessions</strong></p>
+<p>If a spec-kit session is interrupted mid-implementation, recovering requires the <code>SDD Utilities</code> extension (<code>speckit-utils</code>). The core toolkit has no built-in checkpointing.</p>
+
+<p><strong>9. Constitution is opt-in, not enforced</strong></p>
+<p>The architecture relies on the AI respecting the constitution. There's no hard enforcement mechanism. An AI agent can ignore architectural principles unless the template gates explicitly check them. This is a "soft" constraint.</p>
+
+<p><strong>10. No visual or UX layer</strong></p>
+<p>Spec-kit is entirely markdown files + CLI. There's no dashboard, no visual spec editor, no project management UI. The <code>Project Status</code> extension provides terminal-based visibility but it's text-only.</p>
+
+<hr>
+
+<h2>Direct Applications to Master's Ventures</h2>
+
+<table>
+<tr><th>Venture</th><th>How Spec-Kit Applies</th><th>Priority</th></tr>
+<tr><td><strong>AnyoneAI</strong></td><td>Spec-kit could be the specification layer of AnyoneAI — the structured pipeline that takes client requirements through constitute → specify → plan → tasks before handing off to build automation. The methodology IS what AnyoneAI is building.</td><td>🔴 Critical</td></tr>
+<tr><td><strong>CopilotHQ</strong></td><td>Replace ad-hoc briefing process with SDD pipeline for client deliverables. Spec documents become contract artifacts that protect against scope creep. <code>/speckit.taskstoissues</code> → GitHub Issues for project tracking.</td><td>🟠 High</td></tr>
+<tr><td><strong>ProntoCall</strong></td><td>Use constitution to define voice agent principles. Use specify to define conversation flows as user stories. Plan to define Vapi config structure. Requires preset customization but conceptually maps cleanly.</td><td>🟡 Medium</td></tr>
+<tr><td><strong>SunburntAI</strong></td><td>"Spec-Driven AI Agency" as a differentiator — charge clients for structured specification BEFORE build. Positions SunburntAI as rigorous vs. "vibe-coding" competitors. GTM angle.</td><td>🟠 High</td></tr>
+<tr><td><strong>Baron Von Claw</strong></td><td>We already follow this pattern. Formalizing with spec-kit directories gives persistence, structure, and reusability. Our research briefs → <code>research.md</code>, our output → <code>spec.md</code>, our plans → <code>plan.md</code>.</td><td>🟡 Medium</td></tr>
+</table>
+
+<hr>
+
+<h2>Recommended Next Actions</h2>
+
+<ol>
+<li><strong>Install spec-kit and run through a real project</strong> — Pick a small CopilotHQ automation (ideally an n8n workflow) and run it through the full SDD pipeline. Identify exactly where the templates break for non-code artifacts.</li>
+</ol>
+
+<ol>
+<li><strong>Build an n8n preset</strong> — The community preset catalog is empty. An <code>n8n-workflow</code> preset that overrides spec-template.md with automation-specific terminology (triggers, nodes, error handling, credential requirements) would be first-mover and potentially publishable.</li>
+</ol>
+
+<ol>
+<li><strong>Build a Vapi preset</strong> — Same opportunity for voice agent design. Constitution principles: intent handling, fallback flows, turn-taking, escalation triggers. Spec as conversation journey map.</li>
+</ol>
+
+<ol>
+<li><strong>Evaluate AnyoneAI architecture alignment</strong> — Map spec-kit's specify → plan → tasks pipeline to AnyoneAI's intended workflow. Consider: is spec-kit the specification layer that AnyoneAI wraps and automates?</li>
+</ol>
+
+<ol>
+<li><strong>Adopt <code>research.md</code> as standard Baron Von Claw format</strong> — Our research brief pattern already mirrors this. Standardize on spec-kit's structure for consistency and future integration.</li>
+</ol>
+
+<ol>
+<li><strong>Install the Jira or GitHub Issues extension for CopilotHQ</strong> — <code>spec-kit-jira</code> or <code>/speckit.taskstoissues</code> for project tracking. Immediate practical value for client delivery.</li>
+</ol>
+
+<hr>
+
+<h2>Open Questions / Gaps</h2>
+
+<ul>
+<li><strong>Non-code artifact deployment:</strong> How do you "implement" an n8n workflow? The AI can generate JSON but needs a deployment mechanism. Is this a custom extension opportunity?</li>
+<li><strong>Preset publishing:</strong> Zero community presets. What's the actual submission process complexity? Is this worth pursuing for differentiation?</li>
+<li><strong>Multi-tenant spec repositories:</strong> How does spec-kit work across multiple client projects? Separate repos per client? One org repo with subdirectories? No guidance found.</li>
+<li><strong>AnyoneAI integration depth:</strong> Could AnyoneAI literally call <code>specify</code> CLI programmatically as part of its pipeline, or is the methodology better adopted in spirit only?</li>
+<li><strong>AI quality degradation:</strong> The context pollution problem (why Conduct Extension exists) is real. How long does a realistic spec-kit session run before quality degrades?</li>
+<li><strong>Version control for specs:</strong> When spec changes, what triggers re-planning/re-tasking? Is there tooling for spec diff and cascade updates?</li>
+</ul>
+
+<hr>
+
+<h2>Sources</h2>
+
+<table>
+<tr><th>Source</th><th>URL</th><th>Status</th></tr>
+<tr><td>GitHub Repo</td><td>https://github.com/github/spec-kit</td><td><span style="color:#4caf7d">✅</span> Fetched</td></tr>
+<tr><td>spec-driven.md</td><td>https://raw.githubusercontent.com/github/spec-kit/main/spec-driven.md</td><td><span style="color:#4caf7d">✅</span> Fetched (full)</td></tr>
+<tr><td>extensions/README.md</td><td>https://raw.githubusercontent.com/github/spec-kit/main/extensions/README.md</td><td><span style="color:#4caf7d">✅</span> Fetched (full)</td></tr>
+<tr><td>presets/README.md</td><td>https://raw.githubusercontent.com/github/spec-kit/main/presets/README.md</td><td><span style="color:#4caf7d">✅</span> Fetched (full)</td></tr>
+<tr><td>templates/spec-template.md</td><td>https://raw.githubusercontent.com/github/spec-kit/main/templates/spec-template.md</td><td><span style="color:#4caf7d">✅</span> Fetched (full)</td></tr>
+<tr><td>templates/plan-template.md</td><td>https://raw.githubusercontent.com/github/spec-kit/main/templates/plan-template.md</td><td><span style="color:#4caf7d">✅</span> Fetched (full)</td></tr>
+<tr><td>templates/tasks-template.md</td><td>https://raw.githubusercontent.com/github/spec-kit/main/templates/tasks-template.md</td><td><span style="color:#4caf7d">✅</span> Fetched (full)</td></tr>
+<tr><td>templates/constitution-template.md</td><td>https://raw.githubusercontent.com/github/spec-kit/main/templates/constitution-template.md</td><td><span style="color:#4caf7d">✅</span> Fetched (full)</td></tr>
+<tr><td>templates/commands/taskstoissues.md</td><td>https://raw.githubusercontent.com/github/spec-kit/main/templates/commands/taskstoissues.md</td><td><span style="color:#4caf7d">✅</span> Fetched (full)</td></tr>
+<tr><td>presets/catalog.community.json</td><td>https://raw.githubusercontent.com/github/spec-kit/main/presets/catalog.community.json</td><td><span style="color:#4caf7d">✅</span> Fetched — empty</td></tr>
+<tr><td>GitHub API tree</td><td>https://api.github.com/repos/github/spec-kit/git/trees/main?recursive=1</td><td><span style="color:#4caf7d">✅</span> Full repo tree</td></tr>
+<tr><td>Community walkthroughs</td><td>mnriem/* demos (referenced)</td><td>Referenced via README</td></tr>
+</table>
+
+<p><strong>Note:</strong> <code>base/memory/constitution.md</code> and <code>base/templates/*</code> paths from the brief returned 404. The correct paths are <code>templates/</code> at repo root (not <code>base/</code>). All template content was fetched from correct paths.</p>
+
+      </div>
+    </div>
+    <footer>🦞 Baron Von Claw — Forged instrument. Super lobster. Inner council. &nbsp;|&nbsp; Generated 2026-03-24</footer>
+  </main>
+</div>
+</body>
+</html>

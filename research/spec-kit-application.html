@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spec-Kit Application Analysis — Baron Von Claw</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="lobster">🦞</div>
+      <div>
+        <div class="brand">Baron Von Claw</div>
+        <div class="sub">Document Store</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Navigation</div>
+      <div class="sidebar-nav">
+        <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🔬 Research</div>
+      <div class="sidebar-nav">
+        <a href="../research/spec-kit-brief.html"><span class="icon">📋</span> Spec-Kit Brief</a>
+        <a href="../research/spec-kit-deep-dive.html"><span class="icon">🔍</span> Deep Dive</a>
+        <a href="../research/spec-kit-application.html"><span class="icon">🎯</span> Application Analysis</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🎯 Strategy</div>
+      <div class="sidebar-nav">
+        <a href="../strategy/sunburntai-gtm.html"><span class="icon">🔥</span> SunburntAI GTM</a>
+        <a href="../strategy/godfather-offer.html"><span class="icon">💎</span> Godfather Offer</a>
+        <a href="../strategy/icp-framework.html"><span class="icon">👤</span> ICP Framework</a>
+        <a href="../strategy/psychological-conversion.html"><span class="icon">🧠</span> Psych Conversion</a>
+        <a href="../strategy/linkedin.html"><span class="icon">💼</span> LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🏗️ Infrastructure</div>
+      <div class="sidebar-nav">
+        <a href="../infrastructure/vps-plan.html"><span class="icon">🖥️</span> VPS Plan</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">Spec-Kit Application Analysis</div>
+      <div class="topbar-meta"><a href="../index.html" style="color:var(--accent);text-decoration:none;">← Back to Index</a></div>
+    </div>
+    <div class="content">
+      <div class="page-header">
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Research / Application Analysis</div>
+      </div>
+      <div class="prose">
+<h1>Agent 2 Research Report: Spec-Kit Application Analysis</h1>
+<p><strong>Date:</strong> 2026-03-23</p>
+<p><strong>Agent:</strong> Baron Von Claw — Application Analysis</p>
+<p><strong>Brief Reference:</strong> <code>/root/clawd/research/spec-kit-brief.md</code></p>
+<p><strong>Deep-Dive Reference:</strong> Not yet available — working from brief + live web sources</p>
+
+<hr>
+
+<h2>Summary</h2>
+
+<p>Spec-Driven Development (SDD) via GitHub's spec-kit is not just compatible with Master's ventures — it's a structural missing piece across all four of them. The methodology maps almost perfectly onto how CopilotHQ and SunburntAI already deliver client work, but without the structure, repeatability, or premium positioning. AnyoneAI is the highest-leverage opportunity: wrapping spec-kit into an n8n-native SDD pipeline could be the core architectural decision that turns AnyoneAI from "ambitious concept" to "defensible product." The extension and preset systems make this feasible without forking the project. SunburntAI can use SDD as a marketing and pricing differentiator — right now, while no other agencies are doing it. Speed matters here.</p>
+
+<hr>
+
+<h2>Key Findings</h2>
+
+<h3>Finding 1: SDD Adoption in AI Agencies is Still Early — This Is the Window</h3>
+
+<p>As of early 2026, SDD/spec-kit is primarily used by software engineers and indie developers building greenfield apps. The community extensions show broad adoption (Jira integration, multi-agent orchestration, retrospective analysis) but nothing specific to n8n workflows, Vapi voice agents, or AI consulting agencies. The community walkthroughs are all traditional code projects (.NET, Spring Boot, Java, Go).</p>
+
+<p><strong>Implication:</strong> The n8n/Vapi/agency space is wide open. Nobody has planted a flag here yet. A custom n8n preset and a "SDD-for-agencies" positioning angle is available to claim right now. In 6–12 months, other players will figure this out.</p>
+
+<h3>Finding 2: Presets Are Purpose-Built for Master's Use Case</h3>
+
+<p>The preset system lets you override every SDD template — spec-template.md, plan-template.md, tasks-template.md, constitution.md — without touching core spec-kit. Presets are stackable, priority-ordered, and can be installed from private catalogs. You can build:</p>
+<ul>
+<li>An <strong>n8n preset</strong>: Reframes "spec" as a workflow intent document, "plan" as node-level architecture, "tasks" as implementation checklist per flow</li>
+<li>A <strong>Vapi preset</strong>: Reframes "spec" as conversation intent + persona, "plan" as assistant config decisions, "tasks" as prompt tuning + integration config</li>
+</ul>
+
+<p>These presets become IP. Once built, every client engagement runs through the same structured process. Quality goes up, delivery time goes down, and the work is defensible.</p>
+
+<h3>Finding 3: Extensions Provide Production-Grade Workflow Infrastructure</h3>
+
+<p>Relevant community extensions already exist:</p>
+<ul>
+<li><strong>Jira Integration</strong> — Sync specs to Jira Epics/Stories/Issues. Relevant for larger CopilotHQ enterprise clients.</li>
+<li><strong>Fleet Orchestrator</strong> — Full feature lifecycle with human-in-the-loop gates. This is the governance pattern AnyoneAI needs.</li>
+<li><strong>Conduct Extension</strong> — Orchestrates spec-kit phases via sub-agent delegation to reduce context pollution. This mirrors how Baron Von Claw already operates.</li>
+<li><strong>Retrospective Extension</strong> — Post-implementation spec adherence scoring and drift analysis. Client delivery quality gate.</li>
+<li><strong>Ralph Loop</strong> — Autonomous implementation loop using AI agent CLI. Auto-build potential for AnyoneAI.</li>
+</ul>
+
+<p>These aren't features to build — they're features to assemble.</p>
+
+<h3>Finding 4: SDD Handles Non-Code Artifacts — Including JSON Configs</h3>
+
+<p>The spec-driven methodology is explicit that specifications generate <em>implementations</em>, not necessarily <em>code</em>. The community already includes extensions that manage non-code artifacts (architecture docs, compliance documents, multi-agent orchestration scripts). n8n workflow JSON and Vapi assistant JSON are structurally no different from any other generated artifact — they're deterministic outputs from a well-specified implementation plan. The constraint is that Claude Code needs instruction on <em>how</em> to generate valid n8n workflow JSON (which Baron Von Claw already knows how to do).</p>
+
+<h3>Finding 5: The spec-kit Research Agent Pattern Already Matches How We Operate</h3>
+
+<p>The SDD methodology explicitly includes "research agents" as a first-class component. The <code>research.md</code> artifact is generated by sub-agents that investigate library compatibility, performance benchmarks, organisational constraints, and security implications. This is <em>exactly</em> how this multi-agent research brief is structured — and how Baron Von Claw already works. The opportunity: formalise this pattern inside spec-kit so it becomes repeatable client deliverable infrastructure, not ad hoc.</p>
+
+<h3>Finding 6: AnyoneAI Can Wrap spec-kit — This Is a Real Architecture, Not a Metaphor</h3>
+
+<p>The extension system, preset system, and CLI structure of spec-kit are designed to be wrapped. You can override the catalog URL, customise every template, register custom commands, and automate the entire pipeline. AnyoneAI wrapping spec-kit means:</p>
+<ol>
+<li>Client submits requirements (via a form/webhook)</li>
+<li>AnyoneAI runs <code>specify init</code>, runs constitution + specify + plan + tasks</li>
+<li>Custom n8n preset shapes every output into n8n-compatible specifications</li>
+<li>Claude Code (via Ralph Loop extension or direct integration) executes <code>speckit.implement</code></li>
+<li>Output: production-ready n8n workflow JSON</li>
+</ol>
+
+<p>This is a legitimate MVP architecture for AnyoneAI.</p>
+
+<hr>
+
+<h2>Direct Applications to Master's Ventures</h2>
+
+<table>
+<tr><th>Venture</th><th>How Spec-Kit Applies</th><th>Priority</th></tr>
+<tr><td><strong>AnyoneAI</strong></td><td>Core architectural layer — wrap spec-kit with an n8n preset to create the specification-to-workflow pipeline. Fleet Orchestrator + Ralph Loop extensions power the automation. This is the product.</td><td>🔴 HIGH</td></tr>
+<tr><td><strong>CopilotHQ</strong></td><td>Replace ad hoc scoping with SDD client delivery process. Spec = client brief. Plan = architecture decision. Tasks = delivery checklist. Quality gates via Retrospective extension.</td><td>🟠 MEDIUM-HIGH</td></tr>
+<tr><td><strong>SunburntAI</strong></td><td>Use SDD as a market differentiator and premium pricing justification — "Spec-Driven AI Agency." Most AI agencies build from vibes. This positions SunburntAI as disciplined, production-grade, and systematic.</td><td>🟠 MEDIUM-HIGH</td></tr>
+<tr><td><strong>ProntoCall</strong></td><td>Use SDD to structure Vapi agent design. Constitution = voice agent behaviour principles. Specify = conversation intent + call flows. Plan = assistant config. Reduces drift between intent and behaviour.</td><td>🟡 MEDIUM</td></tr>
+</table>
+
+<hr>
+
+<h2>Question-by-Question Analysis</h2>
+
+<h3>Q1: AnyoneAI Fit — Can spec-kit Be the Specification Layer?</h3>
+
+<p><strong>Answer: Yes. It should be.</strong></p>
+
+<p>AnyoneAI's ambition is to automate the full n8n agency workflow from spec → build → deploy. spec-kit is the missing structural layer between "client says what they want" and "Claude Code builds it."</p>
+
+<p><strong>How it works:</strong></p>
+<ol>
+<li>Client fills in AnyoneAI intake form (what they want to automate)</li>
+<li>AnyoneAI translates input into <code>speckit.specify</code> format</li>
+<li>Constitution is pre-loaded with n8n standards (error handling, naming conventions, node patterns)</li>
+<li><code>speckit.plan</code> selects nodes, integrations, data flow</li>
+<li><code>speckit.tasks</code> breaks it into implementable chunks</li>
+<li><code>speckit.implement</code> (via Claude Code or Ralph Loop) generates n8n workflow JSON</li>
+</ol>
+
+<p><strong>What makes this defensible:</strong> The n8n preset + constitution becomes AnyoneAI's proprietary IP. Any agency can prompt Claude — but only AnyoneAI's pipeline enforces consistent, production-grade standards every time.</p>
+
+<p><strong>What a spec for an n8n automation looks like:</strong></p>
+<pre><code># Workflow Specification: Lead Notification System
+
+## Intent
+When a new lead is captured in HubSpot, notify the sales team in Slack with lead details 
+and create a follow-up task in Asana within 5 minutes.
+
+## Acceptance Criteria
+- Trigger fires within 60 seconds of HubSpot contact creation
+- Slack message includes: Name, Email, Company, Source, Lead Score
+- Asana task assigned to correct team member based on lead industry
+- Error handling: retry 3x on API failure, alert ops channel on permanent failure
+- No duplicate notifications for the same lead
+
+## Constraints
+- HubSpot API rate limit: 100 req/10s
+- Slack webhook (not bot token)
+- Asana workspace: [CLIENT_WORKSPACE_ID]</code></pre>
+
+<p>This spec is precise enough for Claude Code to generate valid n8n workflow JSON against an n8n preset that knows what all of those things look like structurally.</p>
+
+<hr>
+
+<h3>Q2: Client Delivery at CopilotHQ — Can SDD Replace/Augment Current Approach?</h3>
+
+<p><strong>Answer: Yes — and it should be phased in as a delivery standard.</strong></p>
+
+<p>Current state (assumed): Master scopes client requests, builds in n8n, iterates. Ad hoc. Works but doesn't scale, doesn't leave a paper trail, doesn't enable delegation.</p>
+
+<p><strong>SDD improves CopilotHQ delivery in 3 ways:</strong></p>
+
+<ol>
+<li><strong>Client alignment before build.</strong> <code>speckit.specify</code> + <code>speckit.clarify</code> forces explicit acceptance criteria before a single node is placed. Eliminates "that's not what I meant" after 3 days of work.</li>
+</ol>
+
+<ol>
+<li><strong>Delegation-ready output.</strong> A spec.md + plan.md can be handed to a junior developer or another AI agent. The specification becomes the handoff artefact instead of a Zoom call.</li>
+</ol>
+
+<ol>
+<li><strong>Retrospective as delivery asset.</strong> The Retrospective extension produces spec adherence reports. Use this as a client-facing QA report: "Here is what we specced. Here is what we built. Here is where we deviated and why." Premium positioning.</li>
+</ol>
+
+<p><strong>Priority:</strong> Introduce the SDD process on the next mid-size CopilotHQ project as an experiment. Measure: does it reduce scope creep? Does it reduce build time? Does the client feel more confident?</p>
+
+<hr>
+
+<h3>Q3: Non-Code Artifacts — Can spec-kit Manage n8n JSON and Vapi Configs?</h3>
+
+<p><strong>Answer: Yes, with a custom implementation instruction layer.</strong></p>
+
+<p>spec-kit doesn't generate code itself — it generates implementation plans that Claude Code executes. The implementation artifact can be anything: a React component, a Python script, or an n8n workflow JSON file.</p>
+
+<p><strong>The constraint:</strong> Claude Code needs clear instructions in the constitution and plan templates telling it that "implementation" means "produce valid n8n workflow JSON" not "write JavaScript."</p>
+
+<p><strong>What this looks like in the n8n preset constitution:</strong></p>
+<pre><code>## Implementation Standards
+- All implementations MUST produce valid importable n8n workflow JSON
+- Every workflow MUST include an error handling path
+- Node names MUST be descriptive (not "HTTP Request1")
+- Sticky notes MUST explain major logic sections
+- No hardcoded credentials — use n8n credential references
+- Always include a Manual Trigger for testing in addition to primary trigger</code></pre>
+
+<p><strong>For Vapi assistants:</strong> The plan template would specify the assistant JSON schema fields (model, voice, firstMessage, systemPrompt, tools, serverUrl) as required outputs. The spec would define conversation intent, persona, and escalation flows. The implementation would generate the Vapi assistant config JSON.</p>
+
+<p><strong>Precedent:</strong> The community brownfield Java demo managed 420,000+ lines across 180 Maven modules — non-standard, complex, multi-artifact. n8n JSON is simpler.</p>
+
+<hr>
+
+<h3>Q4: Preset/Extension Opportunity — Build an n8n Preset and Vapi Voice Agent Preset?</h3>
+
+<p><strong>Answer: Absolutely. These should be built. They're the most concrete IP plays available.</strong></p>
+
+<p><strong>n8n Preset — What It Overrides:</strong></p>
+
+<table>
+<tr><th>Template</th><th>What the Override Does</th></tr>
+<tr><td><code>constitution.md</code></td><td>n8n standards: error handling, naming, credential refs, sticky notes, node positioning</td></tr>
+<tr><td><code>spec-template.md</code></td><td>Workflow intent: trigger type, data sources, transformation logic, output destinations, acceptance criteria</td></tr>
+<tr><td><code>plan-template.md</code></td><td>Node-level architecture: specific n8n nodes, data mappings, credentials required, API rate limits</td></tr>
+<tr><td><code>tasks-template.md</code></td><td>n8n-specific task list: configure trigger → build main flow → add error handling → test each branch → validate output</td></tr>
+</table>
+
+<p><strong>Vapi Voice Agent Preset — What It Overrides:</strong></p>
+
+<table>
+<tr><th>Template</th><th>What the Override Does</th></tr>
+<tr><td><code>constitution.md</code></td><td>Voice agent principles: turn-taking, interruption handling, escalation rules, tone, off-topic handling</td></tr>
+<tr><td><code>spec-template.md</code></td><td>Conversation intent: persona, goal, key flows, success criteria, failure modes</td></tr>
+<tr><td><code>plan-template.md</code></td><td>Assistant config: model, voice, system prompt structure, tool calls, serverUrl, firstMessage</td></tr>
+<tr><td><code>tasks-template.md</code></td><td>Implementation tasks: write system prompt → configure tools → test happy path → test edge cases → configure webhooks</td></tr>
+</table>
+
+<p><strong>Build order:</strong> n8n preset first (highest volume use). Vapi preset second (ProntoCall dependency). Both should be tested against 2-3 real projects before publishing.</p>
+
+<hr>
+
+<h3>Q5: ProntoCall — Can SDD Structure the Vapi Agent Design Process?</h3>
+
+<p><strong>Answer: Yes — and it solves a specific ProntoCall problem.</strong></p>
+
+<p>ProntoCall's value prop is speed: answer leads before competitors, never miss after-hours calls. The risk is voice agent drift — where the assistant starts sounding wrong, handling calls badly, or missing escalation triggers.</p>
+
+<p><strong>SDD for ProntoCall Vapi agents:</strong></p>
+
+<p><strong>Constitution (voice agent principles):</strong></p>
+<ul>
+<li>Always identify as ProntoCall on behalf of [Client Company]</li>
+<li>Never make pricing commitments without human escalation</li>
+<li>Transfer to human if caller expresses anger or legal intent within 2 exchanges</li>
+<li>Collect: Name, Phone, Interest, Budget, Timeline before any close attempt</li>
+<li>Never say "I don't know" — say "Let me get the right person to help you with that"</li>
+</ul>
+
+<p><strong>Specify (per client campaign):</strong></p>
+<ul>
+<li>Industry: HVAC installation</li>
+<li>Goal: Qualify and book inspection calls</li>
+<li>Primary objection: "I'm just looking" → nurture, don't push</li>
+<li>Escalation: Call back request → send SMS confirmation</li>
+</ul>
+
+<p><strong>Plan (Vapi config decisions):</strong></p>
+<ul>
+<li>Voice: Rachel (warm, professional)</li>
+<li>Model: GPT-4o (low latency)</li>
+<li>Tool calls: calendar booking, SMS via Twilio, CRM update</li>
+<li>Max call duration: 4 minutes before handoff offer</li>
+</ul>
+
+<p><strong>Value:</strong> Every new ProntoCall client onboarding generates a spec. Drift gets caught by the Retrospective extension. New team members (if ProntoCall scales) can be handed the spec instead of shadowing 10 calls.</p>
+
+<hr>
+
+<h3>Q6: Research Agent Pattern — Formalise Using spec-kit?</h3>
+
+<p><strong>Answer: Yes — and this report is evidence that the pattern already works. spec-kit formalises it.</strong></p>
+
+<p>Baron Von Claw already operates a research → brief → build pattern. The spec-kit methodology explicitly includes research agents as first-class components. The <code>research.md</code> artifact documents investigation findings that inform specifications.</p>
+
+<p><strong>How to formalise it:</strong></p>
+
+<ol>
+<li>Add a <code>research/</code> directory to the <code>.specify/</code> structure (already partially done in <code>/root/clawd/research/</code>)</li>
+<li>Create a research agent constitution: what sources to check, what questions to answer, what format to output</li>
+<li>Run research as a pre-specify step: <code>speckit.research</code> before <code>speckit.specify</code></li>
+<li>Research outputs become input context for the specify phase</li>
+</ol>
+
+<p><strong>The Conduct extension</strong> (orchestrates spec-kit phases via sub-agent delegation) is the right tool here. It reduces context pollution by delegating each phase to a fresh sub-agent — matching how this multi-agent brief was structured.</p>
+
+<p><strong>For AnyoneAI:</strong> This becomes the "discovery phase" of the platform. Client submits requirements. Research agents investigate: existing integrations, API constraints, competitor tools, data structure. Research report feeds into spec. Spec drives build. The whole thing is documented.</p>
+
+<hr>
+
+<h3>Q7: AnyoneAI as a spec-kit Wrapper — What Does the Product Look Like?</h3>
+
+<p><strong>Answer: Here is the concrete MVP architecture.</strong></p>
+
+<p><strong>AnyoneAI Product: Spec-Driven n8n Agency Platform</strong></p>
+
+<pre><code>CLIENT INPUT
+    ↓
+[AnyoneAI Intake Form]
+- What do you want to automate?
+- What tools/systems are involved?
+- What's the trigger? What's the output?
+- What does success look like?
+    ↓
+[AnyoneAI Spec Engine]
+- Run: speckit init (with n8n preset pre-loaded)
+- Run: speckit.constitution (n8n standards auto-applied)
+- Run: speckit.specify (intake form → spec.md)
+- Run: speckit.clarify (AI asks 3-5 clarifying questions → client answers)
+- Run: speckit.plan (select nodes, data flows, credentials)
+- Run: speckit.tasks (break into implementation tasks)
+    ↓
+[AnyoneAI Build Engine]
+- Run: speckit.implement (Claude Code executes tasks)
+- Output: n8n workflow JSON
+- Output: spec.md + plan.md (documentation)
+    ↓
+[AnyoneAI Deploy Engine]
+- Push workflow JSON to n8n instance via n8n API
+- Configure credentials
+- Run smoke test
+- Deliver to client with spec-adherence report</code></pre>
+
+<p><strong>What makes AnyoneAI defensible vs. "just using Claude to build n8n workflows":</strong></p>
+<ol>
+<li><strong>The n8n preset</strong> — production-grade standards enforced every time</li>
+<li><strong>The spec artefacts</strong> — client gets documentation, not just a JSON file</li>
+<li><strong>The Retrospective</strong> — quality gate that scores adherence to spec</li>
+<li><strong>Human-in-the-loop gates</strong> — via Fleet Orchestrator, client approves spec before build begins</li>
+<li><strong>Version control</strong> — every feature gets a git branch, specs are versioned</li>
+</ol>
+
+<p><strong>Revenue model implication:</strong> AnyoneAI can charge a subscription for the platform (AI agencies pay monthly), or a per-project fee (SMBs pay per automation). The spec.md is a client-facing deliverable that justifies the price premium.</p>
+
+<hr>
+
+<h3>Q8: Competitive/Market Angle — Is SDD Gaining Traction? SunburntAI Differentiator?</h3>
+
+<p><strong>Answer: Traction is real but early. The window for SunburntAI is now, not later.</strong></p>
+
+<p><strong>Market state:</strong></p>
+<ul>
+<li>spec-kit is gaining community momentum (active extension submissions, multiple community walkthroughs, enterprise-focused extensions like Jira + Azure DevOps integration)</li>
+<li>SDD is being adopted by individual developers and engineering teams — not yet by AI consultancies or agencies</li>
+<li>The n8n, Vapi, and AI agency communities have no spec-driven workflow standards yet</li>
+<li>Most AI agencies compete on "we use the latest models" — a commoditising angle</li>
+</ul>
+
+<p><strong>SunburntAI Positioning: "Spec-Driven AI Agency"</strong></p>
+
+<p><strong>The angle:</strong></p>
+<blockquote>"Most AI agencies build your automations from vibes. We spec them first. That means you know exactly what you're getting before we build anything — and you have documentation that outlasts the project."</blockquote>
+
+<p><strong>Why this works:</strong></p>
+<ol>
+<li><strong>Differentiated.</strong> No other AI agency is using this language or process right now.</li>
+<li><strong>Premium justified.</strong> SDD adds a discovery/scoping phase that feels like more rigour → higher price point is natural.</li>
+<li><strong>Risk reduction narrative.</strong> Clients hate scope creep. "We spec first" is a direct answer to that fear.</li>
+<li><strong>Scalable.</strong> When SunburntAI gets a second team member, specs are the handoff artefact.</li>
+</ol>
+
+<p><strong>SunburntAI's SDD pitch (one paragraph):</strong></p>
+
+<blockquote>"At SunburntAI, we use Spec-Driven Development — the same methodology GitHub engineering teams use for complex AI projects. Before we write a single line of code or place a single automation node, we produce a complete specification: what we're building, why, how it works, and what success looks like. You review and approve it. Then we build. You end up with an automation that works <em>and</em> documentation that explains it."</blockquote>
+
+<p><strong>Objection handling:</strong></p>
+<ul>
+<li>"Sounds slower" → "The spec phase is 1-2 hours. It saves days of rework."</li>
+<li>"We just need it built fast" → "We can do rapid spec + build in 48 hours. The spec is how we go that fast without mistakes."</li>
+<li>"Other agencies don't do this" → "That's why their clients often end up with automations that break when one thing changes."</li>
+</ul>
+
+<p><strong>Content/marketing angle:</strong> Write a LinkedIn article: <em>"Why AI agencies build bad automations (and how to fix it)"</em> — introduce SDD as the solution, position SunburntAI as the agency that's already doing it. This is a top-of-funnel authority play.</p>
+
+<hr>
+
+<h2>Recommended Next Actions</h2>
+
+<p><strong>Priority order — revenue impact first:</strong></p>
+
+<ol>
+<li><strong>[WEEK 1] Test SDD on next CopilotHQ or SunburntAI project.</strong> Don't wait to build presets. Run the raw spec-kit flow on a real client project. Learn what works. Identify what needs customising. This is research-through-doing.</li>
+</ol>
+
+<ol>
+<li><strong>[WEEK 1-2] Write the SunburntAI "Spec-Driven AI Agency" positioning.</strong> Update website/LinkedIn. Draft the pitch paragraph above. Add to proposals. Costs nothing, differentiates immediately.</li>
+</ol>
+
+<ol>
+<li><strong>[WEEK 2-3] Build the n8n constitution.</strong> A well-crafted <code>.specify/</code> constitution for n8n projects is the single highest-ROI artefact. It makes every subsequent Claude Code build session more consistent. 2-4 hours of work, used on every project.</li>
+</ol>
+
+<ol>
+<li><strong>[MONTH 1] Build the n8n preset.</strong> Override spec-template.md and plan-template.md with n8n-specific vocabulary and output expectations. This is the core IP for both CopilotHQ and AnyoneAI.</li>
+</ol>
+
+<ol>
+<li><strong>[MONTH 1-2] Install and test Fleet Orchestrator + Retrospective extensions.</strong> These are the quality gates needed for client delivery. Test on a CopilotHQ project. Document the output format.</li>
+</ol>
+
+<ol>
+<li><strong>[MONTH 2-3] AnyoneAI MVP spec.</strong> Use SDD to spec AnyoneAI itself. Run <code>speckit.specify</code> on the AnyoneAI concept. This is meta but appropriate — the platform for spec-driven n8n development should be spec-driven in its own construction.</li>
+</ol>
+
+<ol>
+<li><strong>[MONTH 3+] Build Vapi preset + ProntoCall constitution.</strong> Structure the voice agent design process. Enforce consistency across ProntoCall clients.</li>
+</ol>
+
+<hr>
+
+<h2>Open Questions / Gaps</h2>
+
+<ul>
+<li><strong>Can spec-kit's slash commands run in non-interactive mode?</strong> AnyoneAI needs programmatic invocation of the SDD pipeline, not manual slash command entry. This needs investigation (likely requires direct CLI invocation or a wrapper script).</li>
+</ul>
+
+<ul>
+<li><strong>What does n8n workflow JSON generation look like in practice?</strong> Claude Code can generate it, but does it need fine-tuning prompts, or does a well-written plan.md + n8n constitution produce valid JSON reliably? Needs a test run.</li>
+</ul>
+
+<ul>
+<li><strong>How does spec-kit handle iterative refinement?</strong> When a client wants changes post-build, does the spec update, or do you re-run? The Reconcile extension and Spec Sync extension address this — worth investigating for CopilotHQ change management.</li>
+</ul>
+
+<ul>
+<li><strong>Is there a spec-kit competitor?</strong> As of March 2026, no direct competitor exists in the n8n/AI agency space. Keep monitoring.</li>
+</ul>
+
+<ul>
+<li><strong>AnyoneAI backend:</strong> Does AnyoneAI wrap spec-kit via its CLI, or does it port the methodology into its own pipeline? CLI wrapping is faster to build. Porting gives more control. Decision point for Month 2.</li>
+</ul>
+
+<ul>
+<li><strong>SunburntAI lead pipeline:</strong> SDD positioning won't generate leads on its own. The GTM work already done (<code>/root/clawd/tmp/sunburntai_gtm.md</code>) needs to be connected to this positioning. SDD is the differentiator, not the distribution.</li>
+</ul>
+
+<hr>
+
+<h2>Sources</h2>
+
+<ul>
+<li>GitHub spec-kit README: https://github.com/github/spec-kit</li>
+<li>spec-driven.md methodology: https://github.com/github/spec-kit/blob/main/spec-driven.md</li>
+<li>Extensions README + community catalog: https://github.com/github/spec-kit/blob/main/extensions/README.md</li>
+<li>Presets README: https://github.com/github/spec-kit/blob/main/presets/README.md</li>
+<li>Research brief: <code>/root/clawd/research/spec-kit-brief.md</code></li>
+<li>SunburntAI GTM context: <code>/root/clawd/tmp/sunburntai_gtm.md</code> (referenced from brief)</li>
+<li>USER.md / SOUL.md: Master's context and venture details</li>
+</ul>
+
+      </div>
+    </div>
+    <footer>🦞 Baron Von Claw — Forged instrument. Super lobster. Inner council. &nbsp;|&nbsp; Generated 2026-03-24</footer>
+  </main>
+</div>
+</body>
+</html>

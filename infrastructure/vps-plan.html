@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenClaw VPS Migration Plan</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #222536;
+      --border: #2e3150;
+      --accent: #6c8eff;
+      --accent2: #a78bfa;
+      --text: #e2e4f0;
+      --muted: #7b7f9e;
+      --tag-bg: #1e2140;
+      --success: #4ade80;
+      --warning: #facc15;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .back-link {
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    .doc-header {
+      margin-bottom: 2.5rem;
+    }
+    .doc-type {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--accent);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, var(--text), var(--muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .doc-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    /* Phases */
+    .phase {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .phase-num {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .phase-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .phase-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .step-check {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    code {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.82rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--accent2);
+    }
+    .note {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--warning);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+    .note strong { color: var(--warning); }
+    .arch-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+    .arch-box .arch-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+    .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0.15rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="logo-icon">📄</div>
+      Document Hub
+    </div>
+    <a href="/" class="back-link">← Back to Hub</a>
+  </header>
+
+  <div class="container">
+    <div class="doc-header">
+      <div class="doc-type">🗺️ Plan</div>
+      <h1>OpenClaw VPS Migration</h1>
+      <div class="doc-meta">Created 2026-02-27 &nbsp;·&nbsp; Digital Ocean + Mac Node Pairing</div>
+    </div>
+
+    <!-- Target Architecture -->
+    <div class="arch-box">
+      <div class="arch-title">🏗 Target Architecture</div>
+      <strong>Digital Ocean Droplet</strong> — OpenClaw home base (always-on, isolated from your Mac)<br>
+      <strong>Mac (paired node)</strong> — Connected on-demand when your laptop is awake<br><br>
+      <span class="tag">Ubuntu 22.04</span>
+      <span class="tag">Node.js 22</span>
+      <span class="tag">OpenClaw daemon</span>
+      <span class="tag">Telegram / webchat channels</span>
+      <span class="tag">Mac node pairing</span>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">1</div>
+        <div>
+          <div class="phase-title">Provision the Droplet</div>
+          <div class="phase-subtitle">~5 minutes</div>
+        </div>
+      </div>
+      <ul class="steps">
+        <li><div class="step-check"></div>Log in to Digital Ocean → Create → Droplet</li>
+        <li><div class="step-check"></div>Choose <strong>Ubuntu 22.04 LTS</strong> (x64)</li>
+        <li><div class="step-check"></div>Size: <strong>Basic — $6/mo</strong> (1 vCPU, 1GB RAM) — sufficient for OpenClaw</li>
+        <li><div class="step-check"></div>Region: closest to Brisbane (Singapore or Sydney)</li>
+        <li><div class="step-check"></div>Authentication: SSH key (add your Mac's public key <code>~/.ssh/id_rsa.pub</code>)</li>
+        <li><div class="step-check"></div>Enable <strong>Backups</strong> (optional but recommended, +$1.20/mo)</li>
+        <li><div class="step-check"></div>Create Droplet — note the public IP</li>
+      </ul>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">2</div>
+        <div>
+          <div class="phase-title">Initial Server Setup</div>
+          <div class="phase-subtitle">~10 minutes</div>
+        </div>
+      </div>
+      <ul class="steps">
+        <li><div class="step-check"></div>SSH in: <code>ssh root@&lt;YOUR_IP&gt;</code></li>
+        <li><div class="step-check"></div>Create a non-root user: <code>adduser clawd && usermod -aG sudo clawd</code></li>
+        <li><div class="step-check"></div>Copy SSH key to new user: <code>rsync --archive ~/.ssh /home/clawd/ && chown -R clawd:clawd /home/clawd/.ssh</code></li>
+        <li><div class="step-check"></div>Update packages: <code>apt update && apt upgrade -y</code></li>
+        <li><div class="step-check"></div>Install Node.js 22 via nvm or NodeSource</li>
+        <li><div class="step-check"></div>Install npm globally: <code>npm install -g npm</code></li>
+        <li><div class="step-check"></div>Confirm: <code>node -v && npm -v</code></li>
+      </ul>
+      <div class="note">
+        <strong>Note:</strong> Install Node.js 22 with: <code>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt install -y nodejs</code>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">3</div>
+        <div>
+          <div class="phase-title">Install OpenClaw</div>
+          <div class="phase-subtitle">~5 minutes</div>
+        </div>
+      </div>
+      <ul class="steps">
+        <li><div class="step-check"></div>Switch to <code>clawd</code> user: <code>su - clawd</code></li>
+        <li><div class="step-check"></div>Install OpenClaw globally: <code>npm install -g openclaw</code></li>
+        <li><div class="step-check"></div>Confirm: <code>openclaw --version</code></li>
+        <li><div class="step-check"></div>Run first-time setup: <code>openclaw setup</code></li>
+        <li><div class="step-check"></div>Set your Anthropic API key when prompted</li>
+        <li><div class="step-check"></div>Configure your primary channel (Telegram recommended for remote use)</li>
+      </ul>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">4</div>
+        <div>
+          <div class="phase-title">Migrate Workspace Files</div>
+          <div class="phase-subtitle">~10 minutes</div>
+        </div>
+      </div>
+      <ul class="steps">
+        <li><div class="step-check"></div>On your Mac, copy workspace to VPS: <code>scp -r ~/clawd/* clawd@&lt;YOUR_IP&gt;:~/clawd/</code></li>
+        <li><div class="step-check"></div>Exclude <code>node_modules</code>: use <code>rsync --exclude node_modules</code> instead if needed</li>
+        <li><div class="step-check"></div>Transfer: <code>SOUL.md</code>, <code>USER.md</code>, <code>MEMORY.md</code>, <code>AGENTS.md</code>, <code>TOOLS.md</code>, <code>memory/</code>, <code>docs/</code></li>
+        <li><div class="step-check"></div>Verify files landed correctly on VPS</li>
+        <li><div class="step-check"></div>Transfer any API keys / secrets needed (or re-enter via <code>openclaw config</code>)</li>
+      </ul>
+      <div class="note">
+        <strong>Security:</strong> Don't SCP your entire <code>~</code> — only the clawd workspace. Keep secrets in OpenClaw's encrypted config, not plaintext files.
+      </div>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">5</div>
+        <div>
+          <div class="phase-title">Run OpenClaw as a Service</div>
+          <div class="phase-subtitle">~5 minutes</div>
+        </div>
+      </div>
+      <ul class="steps">
+        <li><div class="step-check"></div>Start the gateway: <code>openclaw gateway start</code></li>
+        <li><div class="step-check"></div>Verify status: <code>openclaw gateway status</code></li>
+        <li><div class="step-check"></div>Enable auto-start on reboot via systemd (see note below)</li>
+        <li><div class="step-check"></div>Test by sending a message via your configured channel</li>
+        <li><div class="step-check"></div>Check logs: <code>openclaw gateway logs</code></li>
+      </ul>
+      <div class="note">
+        <strong>Systemd service:</strong> Create <code>/etc/systemd/system/openclaw.service</code> with <code>ExecStart=/usr/bin/openclaw gateway start</code>, then <code>systemctl enable openclaw && systemctl start openclaw</code>
+      </div>
+    </div>
+
+    <!-- Phase 6 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">6</div>
+        <div>
+          <div class="phase-title">Pair Your Mac as a Node</div>
+          <div class="phase-subtitle">~5 minutes</div>
+        </div>
+      </div>
+      <ul class="steps">
+        <li><div class="step-check"></div>On your Mac, install OpenClaw (or ensure it's installed): <code>npm install -g openclaw</code></li>
+        <li><div class="step-check"></div>On the VPS, generate a pairing token: <code>openclaw nodes pair</code> — note the token/URL</li>
+        <li><div class="step-check"></div>On your Mac, run: <code>openclaw node join &lt;TOKEN_OR_URL&gt;</code></li>
+        <li><div class="step-check"></div>Approve the pairing from VPS: <code>openclaw nodes approve</code></li>
+        <li><div class="step-check"></div>Verify: <code>openclaw nodes status</code> on VPS shows your Mac as a connected node</li>
+        <li><div class="step-check"></div>Test: ask OpenClaw (via chat) to take a Mac screenshot via the node</li>
+      </ul>
+      <div class="note">
+        <strong>Note:</strong> Your Mac node will show as offline when your laptop is closed/off — that's expected and fine. VPS continues running regardless.
+      </div>
+    </div>
+
+    <!-- Phase 7 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">7</div>
+        <div>
+          <div class="phase-title">Validate & Clean Up</div>
+          <div class="phase-subtitle">~10 minutes</div>
+        </div>
+      </div>
+      <ul class="steps">
+        <li><div class="step-check"></div>Test all active channels (Telegram, webchat, etc.) — confirm they respond from VPS</li>
+        <li><div class="step-check"></div>Test a heartbeat — confirm HEARTBEAT_OK fires on schedule</li>
+        <li><div class="step-check"></div>Test memory read/write — confirm MEMORY.md and daily notes persist</li>
+        <li><div class="step-check"></div>Test Mac node: camera snap, screen, or file access while Mac is on</li>
+        <li><div class="step-check"></div>Once validated, stop OpenClaw on your Mac (don't run two main instances)</li>
+        <li><div class="step-check"></div>Update <code>TOOLS.md</code> with VPS IP and SSH details</li>
+        <li><div class="step-check"></div>Optional: set up UFW firewall on VPS (<code>ufw allow ssh && ufw enable</code>)</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>

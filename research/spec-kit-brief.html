@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spec-Kit Research Brief — Baron Von Claw</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="lobster">🦞</div>
+      <div>
+        <div class="brand">Baron Von Claw</div>
+        <div class="sub">Document Store</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Navigation</div>
+      <div class="sidebar-nav">
+        <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🔬 Research</div>
+      <div class="sidebar-nav">
+        <a href="../research/spec-kit-brief.html"><span class="icon">📋</span> Spec-Kit Brief</a>
+        <a href="../research/spec-kit-deep-dive.html"><span class="icon">🔍</span> Deep Dive</a>
+        <a href="../research/spec-kit-application.html"><span class="icon">🎯</span> Application Analysis</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🎯 Strategy</div>
+      <div class="sidebar-nav">
+        <a href="../strategy/sunburntai-gtm.html"><span class="icon">🔥</span> SunburntAI GTM</a>
+        <a href="../strategy/godfather-offer.html"><span class="icon">💎</span> Godfather Offer</a>
+        <a href="../strategy/icp-framework.html"><span class="icon">👤</span> ICP Framework</a>
+        <a href="../strategy/psychological-conversion.html"><span class="icon">🧠</span> Psych Conversion</a>
+        <a href="../strategy/linkedin.html"><span class="icon">💼</span> LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🏗️ Infrastructure</div>
+      <div class="sidebar-nav">
+        <a href="../infrastructure/vps-plan.html"><span class="icon">🖥️</span> VPS Plan</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">Spec-Kit Research Brief</div>
+      <div class="topbar-meta"><a href="../index.html" style="color:var(--accent);text-decoration:none;">← Back to Index</a></div>
+    </div>
+    <div class="content">
+      <div class="page-header">
+        <div class="breadcrumb"><a href="../index.html">Home</a> / Research / Spec-Kit Brief</div>
+      </div>
+      <div class="prose">
+<h1>Research Brief: GitHub Spec-Kit</h1>
+<p><strong>Date:</strong> 2026-03-23</p>
+<p><strong>Requested by:</strong> Master (Christopher)</p>
+<p><strong>Commissioned by:</strong> Baron Von Claw</p>
+
+<hr>
+
+<h2>What is Spec-Kit?</h2>
+
+<p>GitHub's <a href="https://github.com/github/spec-kit"><code>spec-kit</code></a> is an open-source CLI toolkit for <strong>Spec-Driven Development (SDD)</strong> — a methodology that flips the script on traditional vibe-coding by making <em>specifications executable</em>. Instead of prompting an AI to build things from scratch every time, you:</p>
+
+<ol>
+<li><strong>Define governing principles</strong> (<code>/speckit.constitution</code>)</li>
+<li><strong>Write what you want built</strong> (<code>/speckit.specify</code>) — focus on <em>what</em>, not <em>how</em></li>
+<li><strong>Clarify ambiguities</strong> (<code>/speckit.clarify</code>)</li>
+<li><strong>Plan the technical stack</strong> (<code>/speckit.plan</code>)</li>
+<li><strong>Break into tasks</strong> (<code>/speckit.tasks</code>)</li>
+<li><strong>Execute</strong> (<code>/speckit.implement</code>)</li>
+</ol>
+
+<p>Outputs are structured markdown files (spec.md, plan.md, tasks.md, research.md, contracts/) that AI coding agents (including <strong>Claude Code</strong> <span style="color:#4caf7d">✅</span>) execute against. Supports extensions (new capabilities) and presets (customise templates/terminology).</p>
+
+<hr>
+
+<h2>Research Questions</h2>
+
+<h3>Agent 1: Spec-Kit Deep Dive</h3>
+<p><strong>Goal:</strong> Fully understand the repo, methodology, CLI, and extension/preset system</p>
+
+<ol>
+<li>What does the full <code>.specify/</code> directory structure look like after a real project init?</li>
+<li>What do the default templates look like (spec-template.md, plan-template.md, tasks-template.md, constitution.md)?</li>
+<li>How do extensions work — what community extensions exist? Is there a Jira/GitHub Issues extension? API integration?</li>
+<li>How do presets work — what community presets exist?</li>
+<li>How does the branching/git workflow integrate? (branches per feature, sequential numbering)</li>
+<li>What's in <code>spec-driven.md</code> — the full methodology doc?</li>
+<li>How does Claude Code specifically integrate? What slash commands does it expose?</li>
+<li>Can spec-kit be used for non-code projects (e.g., n8n workflow JSON, Vapi voice agent configs)?</li>
+<li>What does <code>research.md</code> look like in a generated project — is this useful for our agent research pattern?</li>
+<li>What are the limitations — what does it <em>not</em> do well?</li>
+</ol>
+
+<p><strong>Sources:</strong></p>
+<ul>
+<li>https://github.com/github/spec-kit</li>
+<li>https://github.com/github/spec-kit/blob/main/spec-driven.md</li>
+<li>https://github.com/github/spec-kit/blob/main/extensions/README.md</li>
+<li>https://github.com/github/spec-kit/blob/main/presets/README.md</li>
+<li>https://github.github.io/spec-kit/</li>
+<li>Community walkthrough repos (mnriem demos)</li>
+</ul>
+
+<hr>
+
+<h3>Agent 2: Application Analysis — How Does This Apply to Us?</h3>
+<p><strong>Goal:</strong> Map spec-kit's value to Master's specific ventures and workflows</p>
+
+<p><strong>Context on Master's world:</strong></p>
+<ul>
+<li><strong>CopilotHQ</strong> (day job): AI consulting/dev firm — builds automations + agents for clients</li>
+<li><strong>AnyoneAI</strong> (platform): Automating the full n8n agency workflow — from spec → build → deploy. Long-game platform play.</li>
+<li><strong>ProntoCall</strong> (side biz): Phone agent company using Vapi/Twilio + n8n</li>
+<li><strong>SunburntAI</strong> (startup): AI consulting, GTM bottleneck</li>
+<li><strong>Primary stack:</strong> n8n (automation), Vapi (voice AI), Claude API, Node.js, Python, Supabase, Airtable</li>
+<li><strong>Uses Claude Code</strong> for coding — spec-kit natively supports it</li>
+</ul>
+
+<p><strong>Questions to answer:</strong></p>
+
+<ol>
+<li><strong>AnyoneAI fit:</strong> AnyoneAI wants to automate the n8n agency workflow. Spec-Driven Development is essentially what AnyoneAI is trying to do — can spec-kit be the <em>specification layer</em> of AnyoneAI? How would you use spec-kit to define n8n workflow specs before building them?</li>
+</ol>
+
+<ol>
+<li><strong>Client delivery at CopilotHQ:</strong> Can SDD replace or augment the current approach of building automations? Would <code>speckit.specify</code> → <code>speckit.plan</code> → <code>speckit.implement</code> work for n8n workflow delivery? What would a spec for an n8n automation look like?</li>
+</ol>
+
+<ol>
+<li><strong>Non-code artifacts:</strong> n8n workflows are JSON. Vapi assistants are JSON config. Can spec-kit manage specs for these? Is there precedent for non-code deliverables?</li>
+</ol>
+
+<ol>
+<li><strong>Preset/extension opportunity:</strong> Could Master build a custom <strong>n8n preset</strong> for spec-kit that translates SDD into n8n workflow specs, error-handling standards, node naming conventions, etc.? What about a <strong>Vapi voice agent preset</strong>?</li>
+</ol>
+
+<ol>
+<li><strong>ProntoCall:</strong> Could spec-kit help structure the Vapi agent design process — constituting principles for voice agent behaviour, then specifying conversation flows?</li>
+</ol>
+
+<ol>
+<li><strong>Research agent pattern:</strong> The spec-kit methodology includes a <code>research.md</code> output and parallel research sub-agents. This mirrors how Baron Von Claw already works. Is there an opportunity to formalise this pattern using spec-kit?</li>
+</ol>
+
+<ol>
+<li><strong>AnyoneAI as a spec-kit wrapper:</strong> Could AnyoneAI literally wrap spec-kit — taking client requirements in, running them through the SDD pipeline, and outputting production-ready n8n workflow JSON? What would that product look like?</li>
+</ol>
+
+<ol>
+<li><strong>Competitive/market angle:</strong> Is SDD/spec-kit gaining traction? Are other AI agencies using this? Could SunburntAI differentiate by being a "Spec-Driven AI Agency"?</li>
+</ol>
+
+<hr>
+
+<h2>Output Format (Both Agents)</h2>
+
+<p>Each agent should produce a structured markdown report:</p>
+
+<pre><code># [Agent Name] Research Report: Spec-Kit
+
+## Summary (3-5 sentences)
+
+## Key Findings
+### Finding 1: [Title]
+...
+
+## Direct Applications to Master's Ventures
+| Venture | How Spec-Kit Applies | Priority |
+|---|---|---|
+
+## Recommended Next Actions
+1. ...
+2. ...
+
+## Open Questions / Gaps
+- ...
+
+## Sources
+- ...</code></pre>
+
+<p>Save reports to:</p>
+<ul>
+<li>Agent 1: <code>/root/clawd/research/spec-kit-deep-dive.md</code></li>
+<li>Agent 2: <code>/root/clawd/research/spec-kit-application.md</code></li>
+</ul>
+
+<hr>
+
+<h2>Related Context</h2>
+
+<ul>
+<li>Master is already using <strong>Claude Code</strong> (spec-kit compatible <span style="color:#4caf7d">✅</span>)</li>
+<li><strong>AnyoneAI</strong> is conceptually aligned with SDD — automate the agency workflow</li>
+<li>Baron Von Claw already uses a research-then-brief-then-build pattern that mirrors SDD</li>
+<li>SunburntAI GTM package already built (<code>/root/clawd/tmp/sunburntai_gtm.md</code>) — could SDD be a differentiator angle for SunburntAI?</li>
+</ul>
+
+      </div>
+    </div>
+    <footer>🦞 Baron Von Claw — Forged instrument. Super lobster. Inner council. &nbsp;|&nbsp; Generated 2026-03-24</footer>
+  </main>
+</div>
+</body>
+</html>
