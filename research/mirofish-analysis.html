@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiroFish Analysis</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="lobster">🦞</div>
+      <div>
+        <div class="brand">Baron Von Claw</div>
+        <div class="sub">Document Store</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Navigation</div>
+      <div class="sidebar-nav">
+        <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🔬 Research</div>
+      <div class="sidebar-nav">
+        <a href="spec-kit-brief.html"><span class="icon">📋</span> Spec-Kit Brief</a>
+        <a href="spec-kit-deep-dive.html"><span class="icon">🔍</span> Deep Dive</a>
+        <a href="spec-kit-application.html"><span class="icon">🎯</span> Application Analysis</a>
+        <a href="research-man-agent-card.html"><span class="icon">🧠</span> Research Man</a>
+        <a href="mirofish-analysis.html" class="active"><span class="icon">🐟</span> MiroFish Analysis</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🎯 Strategy</div>
+      <div class="sidebar-nav">
+        <a href="../strategy/sunburntai-gtm.html"><span class="icon">🔥</span> SunburntAI GTM</a>
+        <a href="../strategy/godfather-offer.html"><span class="icon">💎</span> Godfather Offer</a>
+        <a href="../strategy/icp-framework.html"><span class="icon">👤</span> ICP Framework</a>
+        <a href="../strategy/psychological-conversion.html"><span class="icon">🧠</span> Psych Conversion</a>
+        <a href="../strategy/linkedin.html"><span class="icon">💼</span> LinkedIn</a>
+        <a href="../strategy/digital-employees-workflow-architecture.html"><span class="icon">🧩</span> Marketing Digital Employees Plan</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🏗️ Infrastructure</div>
+      <div class="sidebar-nav">
+        <a href="../infrastructure/vps-plan.html"><span class="icon">🖥️</span> VPS Plan</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">Research</div>
+      <div class="topbar-meta">Last updated: 2026-03-30</div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>🐟 MiroFish Analysis</h1>
+        <p>What MiroFish is, how it works, what it appears to cost, what it was built for, and how it can be used for marketing, ICP simulation, and strategy validation.</p>
+      </div>
+
+      <h2>Bottom Line</h2>
+      <p><strong>MiroFish is a multi-agent simulation and prediction engine.</strong> It takes seed material from the real world—news, reports, stories, policies, financial signals—then generates a simulated social world populated by many agents with memory, personas, and interaction logic. It is built to let a user ask “what happens if…” and then inspect a simulation report plus interact with the simulated world.</p>
+      <p>For marketing and business strategy, the most interesting use is <strong>not literal prediction of the future</strong>. The real leverage is using it as a <strong>high-context scenario simulator</strong> for market reactions, ICP behavior, narrative spread, objection emergence, messaging tests, and strategic what-if analysis.</p>
+      <p>Bluntly: MiroFish looks more useful as a <strong>strategic simulation layer</strong> than as a normal analytics tool.</p>
+
+      <h2>What It Does</h2>
+      <ul>
+        <li>Builds a “parallel digital world” from seed materials and user-defined prediction goals</li>
+        <li>Creates many agents with independent personalities, long-term memory, and behavior logic</li>
+        <li>Runs multi-agent simulation to model how events or narratives might evolve</li>
+        <li>Generates a detailed prediction report</li>
+        <li>Allows interaction with the simulated world and with a report agent after the run</li>
+      </ul>
+      <p>Based on the public README, MiroFish positions itself as a “simple and universal swarm intelligence engine” built to “predict anything.” That positioning is ambitious. The more credible reading is: it is a <strong>simulation environment for emergent multi-agent scenario exploration</strong>.</p>
+
+      <h2>How It Works</h2>
+      <p>The public workflow described by the project is:</p>
+      <ol>
+        <li><strong>Graph Building</strong> — extract seed information, inject individual and collective memory, and construct a GraphRAG-style knowledge graph</li>
+        <li><strong>Environment Setup</strong> — extract entities and relationships, generate personas, and configure the environment</li>
+        <li><strong>Simulation</strong> — run parallel simulation with dynamic temporal memory updates</li>
+        <li><strong>Report Generation</strong> — a ReportAgent interacts deeply with the post-simulation environment and generates findings</li>
+        <li><strong>Deep Interaction</strong> — the user can talk to simulated agents and the report agent</li>
+      </ol>
+      <p>The README also states the simulation engine is powered by <a href="https://github.com/camel-ai/oasis">OASIS (Open Agent Social Interaction Simulations)</a>, which strongly suggests MiroFish is packaging social multi-agent simulation into a more usable prediction product.</p>
+
+      <h2>Pricing</h2>
+      <p><strong>No public SaaS pricing was clearly published in the sources reviewed.</strong></p>
+      <p>What is visible instead:</p>
+      <ul>
+        <li>The GitHub repo is public and open source</li>
+        <li>You can self-host it from source or via Docker</li>
+        <li>You need your own LLM API key</li>
+        <li>You need a Zep Cloud API key for memory</li>
+        <li>The README explicitly warns that simulations can have <strong>high model consumption</strong> and recommends trying fewer than 40 rounds first</li>
+      </ul>
+      <p>So the practical pricing model today appears to be:</p>
+      <ul>
+        <li><strong>Software price:</strong> open-source / self-hosted</li>
+        <li><strong>Operating cost:</strong> LLM inference cost + memory service cost + infrastructure cost</li>
+      </ul>
+      <p>In other words: no obvious flat product pricing, but potentially meaningful runtime cost depending on simulation depth and model choice.</p>
+
+      <h2>What It Was Built For</h2>
+      <p>Based on the README and public materials, MiroFish was built for:</p>
+      <ul>
+        <li>public opinion simulation</li>
+        <li>policy rehearsal</li>
+        <li>financial and macro scenario exploration</li>
+        <li>narrative / story outcome simulation</li>
+        <li>multi-agent “what if” prediction exercises</li>
+      </ul>
+      <p>Its stated vision is broader: a “swarm intelligence mirror” that maps reality and lets users test outcomes before acting. That makes it strategically interesting for business users who want to simulate reactions rather than merely summarize historical data.</p>
+
+      <h2>Best Use Cases for Marketing and Strategy</h2>
+      <p>This is where it gets interesting.</p>
+
+      <h3>1) ICP Reaction Simulation</h3>
+      <p>You can use MiroFish as a synthetic market environment where agents approximate customer types, stakeholders, or audience factions. Instead of asking “what does the market think?” you ask “how might different segments react over time if this offer, narrative, or change enters the system?”</p>
+      <p><strong>Best use:</strong> messaging, offer positioning, objection discovery, emotional reaction mapping.</p>
+
+      <h3>2) Narrative Spread / Reputation Risk</h3>
+      <p>MiroFish appears particularly well suited to simulate public opinion dynamics. That makes it useful for:</p>
+      <ul>
+        <li>brand reputation scenarios</li>
+        <li>founder messaging tests</li>
+        <li>product launch backlash simulation</li>
+        <li>PR response rehearsal</li>
+      </ul>
+
+      <h3>3) Product-Market-Fit Hypothesis Testing</h3>
+      <p>You can use it to pressure-test assumptions before shipping a strategy, especially where human reaction and second-order effects matter.</p>
+      <p>Example questions:</p>
+      <ul>
+        <li>How might different buyer personas interpret this positioning?</li>
+        <li>Which objections spread fastest through the simulated market?</li>
+        <li>What happens if we lower price but increase implementation complexity?</li>
+        <li>How might a competitor’s narrative blunt our launch?</li>
+      </ul>
+
+      <h3>4) Market Research Validation Layer</h3>
+      <p>Yes — in principle, you can integrate MiroFish with other research agents and use it as a <strong>synthetic validation layer</strong>.</p>
+      <p>The right framing is not “MiroFish is the truth.” The right framing is:</p>
+      <ul>
+        <li>research agents gather evidence</li>
+        <li>MiroFish simulates plausible behavior under that evidence</li>
+        <li>you compare simulation outcomes with research conclusions</li>
+      </ul>
+      <p>That makes MiroFish useful as an <strong>adversarial or exploratory second pass</strong>, especially for testing whether a proposed ICP narrative actually holds up under interaction.</p>
+
+      <h2>Can MiroFish Act as the ICP?</h2>
+      <p><strong>Yes, but only as a synthetic proxy — not a substitute for real customer evidence.</strong></p>
+      <p>That means:</p>
+      <ul>
+        <li><strong>Good use:</strong> simulate buyer reactions, objections, motivations, social spread, internal stakeholder conflict, and scenario divergence</li>
+        <li><strong>Bad use:</strong> replacing customer interviews, win/loss data, survey evidence, or actual sales calls</li>
+      </ul>
+      <p>The strongest pattern is:</p>
+      <ol>
+        <li>Research agents build the ICP from real sources</li>
+        <li>MiroFish instantiates synthetic personas based on that structure</li>
+        <li>You run scenarios through those personas</li>
+        <li>You compare simulated reactions against strategic assumptions</li>
+      </ol>
+      <p>So yes, MiroFish can play the role of an <strong>interactive synthetic ICP sandbox</strong>, which is strategically useful.</p>
+
+      <h2>How to Get the Best Use Out of It</h2>
+      <p>To get the most value from MiroFish, do <strong>not</strong> treat it like a black-box oracle. Treat it like a simulation environment that needs strong inputs.</p>
+      <p>Best practice:</p>
+      <ol>
+        <li>Feed it high-quality seed material: research summaries, customer interviews, objection logs, market reports, competitor analysis, and internal strategy docs</li>
+        <li>Define a narrow prediction question rather than a vague one</li>
+        <li>Model specific segments or stakeholder roles, not generic “customers”</li>
+        <li>Use it to explore divergence, objections, edge cases, and second-order effects</li>
+        <li>Compare outputs against real evidence, not just intuition</li>
+      </ol>
+      <p>If you put garbage into it, you will get cinematic garbage back.</p>
+
+      <h2>Marketing and Business Scenarios</h2>
+
+      <h3>Scenario 1 — Offer Testing Before Launch</h3>
+      <p><strong>Goal:</strong> Test two offer variants before shipping to market.</p>
+      <p><strong>Flow:</strong></p>
+      <ol>
+        <li>Research agent compiles ICP pains, buying triggers, objections, and competitor alternatives</li>
+        <li>MiroFish instantiates segments: skeptical buyer, budget buyer, status-driven buyer, technical evaluator, internal champion</li>
+        <li>Run simulation on Offer A vs Offer B</li>
+        <li>Observe which objections dominate, what narratives spread, and which buyer types convert or resist</li>
+      </ol>
+      <p><strong>Strategic value:</strong> surfaces failure modes before real spend.</p>
+
+      <h3>Scenario 2 — Messaging Stress Test</h3>
+      <p><strong>Goal:</strong> Find the weak points in positioning.</p>
+      <p><strong>Flow:</strong></p>
+      <ol>
+        <li>Input homepage copy, product promise, and competitor context</li>
+        <li>Define target personas and hostile alternatives</li>
+        <li>Simulate how narratives evolve after exposure to messaging</li>
+        <li>Extract the phrases that trigger skepticism, confusion, excitement, or dismissal</li>
+      </ol>
+      <p><strong>Strategic value:</strong> helps refine copy and angle before publishing.</p>
+
+      <h3>Scenario 3 — Product-Market-Fit Exploration</h3>
+      <p><strong>Goal:</strong> Test whether the current product framing actually aligns with user needs.</p>
+      <p><strong>Flow:</strong></p>
+      <ol>
+        <li>Feed in customer interview summaries and current product strategy</li>
+        <li>Build distinct persona clusters</li>
+        <li>Run adoption, resistance, and advocacy scenarios</li>
+        <li>Look for mismatch between internal assumptions and simulated behavior patterns</li>
+      </ol>
+      <p><strong>Strategic value:</strong> reveals where positioning or product design may be off.</p>
+
+      <h3>Scenario 4 — Research Validation Layer</h3>
+      <p><strong>Goal:</strong> Validate findings from other market research agents.</p>
+      <p><strong>Flow:</strong></p>
+      <ol>
+        <li>Research agents create a structured market thesis</li>
+        <li>MiroFish consumes that as seed material</li>
+        <li>Simulate customer and stakeholder reactions under multiple conditions</li>
+        <li>Compare whether the thesis survives contact with a more dynamic social environment</li>
+      </ol>
+      <p><strong>Strategic value:</strong> acts as a challenge function instead of a confirmation machine.</p>
+
+      <h3>Scenario 5 — PR / Reputation Simulation</h3>
+      <p><strong>Goal:</strong> Rehearse response to controversy, policy change, or sensitive public narrative.</p>
+      <p><strong>Flow:</strong></p>
+      <ol>
+        <li>Input the event, public context, likely factions, and response options</li>
+        <li>Run simulations on different response strategies</li>
+        <li>See how sentiment and narrative spread differ</li>
+      </ol>
+      <p><strong>Strategic value:</strong> useful for public-facing companies, founder brands, and sensitive launches.</p>
+
+      <h2>User Stories</h2>
+
+      <h3>User Story 1 — Founder testing a new narrative</h3>
+      <p>“As a founder, I want to know how three buyer segments react to a new category-defining pitch, so I can refine the message before running paid acquisition.”</p>
+      <p><strong>How they use MiroFish:</strong> input research + draft pitch + segment descriptions, run simulation, extract objections and traction patterns, refine positioning.</p>
+
+      <h3>User Story 2 — PMM validating product-market-fit assumptions</h3>
+      <p>“As a product marketer, I want to test whether our current value prop resonates with economic buyers, operators, and technical evaluators, so I can adjust positioning before launch.”</p>
+      <p><strong>How they use MiroFish:</strong> convert interview notes and market research into seed material, simulate reaction across stakeholders, identify misalignment points.</p>
+
+      <h3>User Story 3 — Research team validating an ICP model</h3>
+      <p>“As a research lead, I want to compare our evidence-based ICP with a synthetic behavior simulation, so I can see whether our assumptions break under interaction.”</p>
+      <p><strong>How they use MiroFish:</strong> instantiate synthetic ICPs from research outputs, run scenario prompts, compare simulation to real-world evidence and revise the ICP model.</p>
+
+      <h3>User Story 4 — Agency or internal team rehearsing a launch</h3>
+      <p>“As a marketing team, we want to pressure-test a campaign before launch, so we can identify backlash, confusion, or weak hooks before spending money.”</p>
+      <p><strong>How they use MiroFish:</strong> feed launch narrative, audience assumptions, competitor context, and risk scenarios; use results to improve campaign structure and response planning.</p>
+
+      <h2>Integration Pattern with Other Market Research Agents</h2>
+      <p>This is the architecture I would recommend if you want MiroFish to work with your existing agent workforce:</p>
+      <ol>
+        <li><strong>Research agents</strong> collect primary sources, interviews, competitor evidence, market signals, and objections</li>
+        <li><strong>Synthesis agent</strong> converts the findings into a structured ICP and scenario packet</li>
+        <li><strong>MiroFish</strong> consumes that packet as seed material and simulates reaction trajectories</li>
+        <li><strong>Review agent / CMO agent</strong> compares simulation output against evidence and makes strategic decisions</li>
+      </ol>
+      <p>This makes MiroFish an <strong>interaction simulator</strong>, not the sole source of insight.</p>
+
+      <h2>Where It Fits Best</h2>
+      <ul>
+        <li>high-uncertainty messaging decisions</li>
+        <li>launch planning</li>
+        <li>narrative and public-opinion simulation</li>
+        <li>scenario planning</li>
+        <li>PMF hypothesis testing</li>
+        <li>research validation / adversarial testing</li>
+      </ul>
+
+      <h2>Where It Fits Worst</h2>
+      <ul>
+        <li>exact demand forecasting</li>
+        <li>financial precision forecasting without strong models and data</li>
+        <li>replacing real customer research</li>
+        <li>simple reporting tasks where normal analytics are enough</li>
+      </ul>
+
+      <h2>My Assessment</h2>
+      <p>MiroFish is strategically interesting because it sits between:</p>
+      <ul>
+        <li>agent simulation</li>
+        <li>market research</li>
+        <li>scenario planning</li>
+        <li>interactive synthetic audience modeling</li>
+      </ul>
+      <p>Its strongest business use is likely <strong>synthetic scenario exploration for strategy and messaging</strong>, especially when paired with evidence-gathering research agents. If you use it that way, it could become a very sharp tool for pre-launch reasoning and ICP stress testing.</p>
+      <p>If you use it as a magical truth machine, you will fool yourself.</p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://github.com/666ghj/MiroFish">GitHub Repository</a></li>
+        <li><a href="https://raw.githubusercontent.com/666ghj/MiroFish/main/README-EN.md">README-EN</a></li>
+        <li><a href="https://666ghj.github.io/mirofish-demo/">Live Demo</a></li>
+        <li><a href="https://github.com/camel-ai/oasis">OASIS (Open Agent Social Interaction Simulations)</a></li>
+        <li><a href="https://app.getzep.com/">Zep Cloud</a></li>
+        <li><a href="https://trendshift.io/repositories/16144">Trendshift Repository Page</a></li>
+        <li><a href="https://mirofish.homes">mirofish.homes</a> (site fetch failed during this pass, so claims above rely primarily on the public repo/readme and linked materials)</li>
+      </ul>
+    </div>
+
+    <footer>
+      🦞 Baron Von Claw — MiroFish research analysis. &nbsp;|&nbsp; Added 2026-03-30
+    </footer>
+  </main>
+</div>
+</body>
+</html>
