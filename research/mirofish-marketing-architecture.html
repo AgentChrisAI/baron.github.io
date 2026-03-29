@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiroFish for Marketing Agent Architecture</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="lobster">🦞</div>
+      <div>
+        <div class="brand">Baron Von Claw</div>
+        <div class="sub">Document Store</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Navigation</div>
+      <div class="sidebar-nav">
+        <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🔬 Research</div>
+      <div class="sidebar-nav">
+        <a href="spec-kit-brief.html"><span class="icon">📋</span> Spec-Kit Brief</a>
+        <a href="spec-kit-deep-dive.html"><span class="icon">🔍</span> Deep Dive</a>
+        <a href="spec-kit-application.html"><span class="icon">🎯</span> Application Analysis</a>
+        <a href="research-man-agent-card.html"><span class="icon">🧠</span> Research Man</a>
+        <a href="mirofish-analysis.html"><span class="icon">🐟</span> MiroFish Analysis</a>
+        <a href="mirofish-marketing-architecture.html" class="active"><span class="icon">🧪</span> MiroFish Marketing Architecture</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🎯 Strategy</div>
+      <div class="sidebar-nav">
+        <a href="../strategy/sunburntai-gtm.html"><span class="icon">🔥</span> SunburntAI GTM</a>
+        <a href="../strategy/godfather-offer.html"><span class="icon">💎</span> Godfather Offer</a>
+        <a href="../strategy/icp-framework.html"><span class="icon">👤</span> ICP Framework</a>
+        <a href="../strategy/psychological-conversion.html"><span class="icon">🧠</span> Psych Conversion</a>
+        <a href="../strategy/linkedin.html"><span class="icon">💼</span> LinkedIn</a>
+        <a href="../strategy/digital-employees-workflow-architecture.html"><span class="icon">🧩</span> Marketing Digital Employees Plan</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🏗️ Infrastructure</div>
+      <div class="sidebar-nav">
+        <a href="../infrastructure/vps-plan.html"><span class="icon">🖥️</span> VPS Plan</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">Research</div>
+      <div class="topbar-meta">Last updated: 2026-03-30</div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>🧪 MiroFish for Marketing Agent Architecture</h1>
+        <p>Deep dive on where MiroFish fits in a marketing-agent stack, how to build a reliable synthetic ICP base, and how to use simulation without fooling yourself.</p>
+      </div>
+
+      <h2>Executive Summary</h2>
+      <p><strong>MiroFish should not be your source of truth.</strong> It should be your <strong>synthetic discourse and reaction simulator</strong>.</p>
+      <p>That means:</p>
+      <ul>
+        <li>use research agents to gather real evidence</li>
+        <li>use an ICP synthesis layer to structure the market model</li>
+        <li>use MiroFish to simulate how those personas, narratives, and objections interact under pressure</li>
+        <li>use the CMO / strategy layer to compare simulation against actual evidence before action</li>
+      </ul>
+      <p>Bluntly: MiroFish is strongest as a <strong>scenario-testing subsystem</strong>, not an oracle and not a CRM replacement.</p>
+
+      <h2>What the Repo Reveals</h2>
+      <p>The public repository shows MiroFish as a pipeline around:</p>
+      <ul>
+        <li>document upload</li>
+        <li>ontology / entity extraction</li>
+        <li>graph building via Zep</li>
+        <li>persona/profile generation</li>
+        <li>simulation configuration</li>
+        <li>Twitter/Reddit-style social simulation via OASIS-backed scripts</li>
+        <li>report generation and post-run interaction</li>
+      </ul>
+      <p>This matters because it tells us what it <em>really</em> is: not a generic business simulator, but a graph-seeded multi-agent social simulation system.</p>
+
+      <h3>Observed technical signals</h3>
+      <ul>
+        <li>Accepted input file types: <code>pdf</code>, <code>md</code>, <code>txt</code>, <code>markdown</code></li>
+        <li>Upload limit: <strong>50 MB</strong></li>
+        <li>Ontology generation truncates context to roughly <strong>50k characters</strong> for LLM analysis</li>
+        <li>Requires LLM API credentials and <strong>ZEP_API_KEY</strong></li>
+        <li>Simulation scripts explicitly target <strong>Twitter</strong> and <strong>Reddit</strong></li>
+        <li>README warns that simulation can be high-consumption and suggests trying fewer than <strong>40 rounds</strong> first</li>
+      </ul>
+      <p>Translation: the system is real, but its default worldview is <strong>public-discourse simulation</strong>, not private enterprise buying-committee simulation.</p>
+
+      <h2>Where MiroFish Fits in a Marketing Agent Stack</h2>
+      <p>The best role for MiroFish is between <strong>research synthesis</strong> and <strong>final strategy / creative decisions</strong>.</p>
+
+      <h3>Recommended architecture</h3>
+      <ol>
+        <li><strong>Research ingestion agents</strong> gather evidence</li>
+        <li><strong>ICP synthesis agent</strong> structures segment and buyer-role hypotheses</li>
+        <li><strong>Simulation prep agent</strong> converts evidence into MiroFish seed packets</li>
+        <li><strong>MiroFish</strong> simulates reaction, objection spread, and narrative dynamics</li>
+        <li><strong>Simulation analyst</strong> extracts patterns from outputs</li>
+        <li><strong>CMO agent</strong> compares evidence and simulation, then decides what to test</li>
+      </ol>
+
+      <h3>Recommended agent roster</h3>
+      <ul>
+        <li><strong>Research Man</strong> — market evidence, competitor research, language mining</li>
+        <li><strong>ICP Synthesist</strong> — structured buyer/segment modeling</li>
+        <li><strong>Simulation Prep Agent</strong> — converts structured insight into seed docs + scenario briefs</li>
+        <li><strong>MiroFish</strong> — synthetic reaction/discourse simulation</li>
+        <li><strong>Simulation Analyst</strong> — extracts objections, resonance patterns, skeptic archetypes, spread paths</li>
+        <li><strong>CMO Agent</strong> — final synthesis, prioritization, decision-making</li>
+        <li><strong>Content / Messaging Agent</strong> — rewrites copy and campaign assets based on findings</li>
+      </ul>
+
+      <h2>The Correct Use of Synthetic ICPs</h2>
+      <p>A synthetic ICP is not a paragraph. It is a structured evidence-backed model.</p>
+      <p>Do <strong>not</strong> define it as:</p>
+      <blockquote>Our ideal customer is a RevOps leader at a mid-market SaaS company...</blockquote>
+      <p>That is soft nonsense unless grounded.</p>
+
+      <h3>Recommended synthetic ICP structure</h3>
+      <ul>
+        <li><strong>Segment layer</strong> — company type, team size, revenue band, geography, maturity, urgency</li>
+        <li><strong>Buyer-role layer</strong> — goals, fears, KPIs, incentives, objections, authority, language style</li>
+        <li><strong>Trigger layer</strong> — why-now events, compliance pressure, hiring changes, growth pain, stack change</li>
+        <li><strong>Decision dynamics layer</strong> — champion, blocker, evaluator, economic buyer, skeptic, influencer</li>
+        <li><strong>Message sensitivity layer</strong> — what resonates, what triggers distrust, what proof is required</li>
+        <li><strong>Confidence/provenance layer</strong> — source type, source count, recency, confidence score</li>
+      </ul>
+      <p>This structured model should live in your own system as the canonical truth. MiroFish should consume slices of it for simulation.</p>
+
+      <h2>How to Build a Reliable Synthetic ICP Base</h2>
+      <p><strong>Do not build it from one “golden” source.</strong> Build it from a layered evidence stack.</p>
+
+      <h3>The evidence stack</h3>
+      <ol>
+        <li><strong>Conversation reality</strong> — customer calls, sales notes, support tickets, onboarding friction, win/loss notes</li>
+        <li><strong>Public buyer language</strong> — Reddit, niche communities, forums, review sites, public commentary</li>
+        <li><strong>Competitor corpus</strong> — websites, pricing pages, docs, case studies, webinars, comparison pages</li>
+        <li><strong>Firmographic + intent data</strong> — account fit, buyer intent, category activity</li>
+        <li><strong>Hiring and workforce signals</strong> — job posts, skills demand, team buildout, expansion moves</li>
+        <li><strong>Traffic and adjacency signals</strong> — related domains, audience overlap, category neighborhood</li>
+        <li><strong>Market development signals</strong> — funding, M&amp;A, product launches, regulatory pressure, macro trends</li>
+      </ol>
+      <p>The rule is simple: <strong>triangulation over purity</strong>.</p>
+
+      <h3>Practical source categories</h3>
+      <ul>
+        <li><strong>Review / buyer intent:</strong> G2, TrustRadius, Capterra</li>
+        <li><strong>Intent / sales intelligence:</strong> Bombora, ZoomInfo, Apollo, Clearbit, Clay, Owler</li>
+        <li><strong>Social listening:</strong> Brandwatch, Sprout, Reddit API, public forum scraping</li>
+        <li><strong>Hiring / job-post signals:</strong> Lightcast, PredictLeads, job-board datasets</li>
+        <li><strong>Competitor / market adjacency:</strong> Similarweb, Semrush Trends, direct competitor corpus extraction</li>
+      </ul>
+      <p>You do not need every vendor. You need enough diversity of evidence to avoid hallucinating a fake market.</p>
+
+      <h2>Practical Data Thresholds</h2>
+      <p>You asked, effectively, how to get <em>enough</em> data.</p>
+      <p>For one serious synthetic ICP hypothesis, a useful minimum is:</p>
+      <ul>
+        <li><strong>20–30</strong> real customer/sales/support conversations or equivalent notes</li>
+        <li><strong>100–300</strong> public language samples</li>
+        <li><strong>10–20</strong> competitor artifacts</li>
+        <li><strong>20–50</strong> review excerpts</li>
+        <li><strong>20–50</strong> job posts / company-development signals</li>
+        <li>firmographic and intent enrichment for segment grounding</li>
+      </ul>
+      <p>A stronger base looks more like:</p>
+      <ul>
+        <li><strong>50+</strong> conversations</li>
+        <li><strong>500+</strong> public language samples</li>
+        <li>multi-source intent</li>
+        <li>win/loss data</li>
+        <li>repeated update cadence</li>
+      </ul>
+      <p>That is where the synthetic layer starts becoming genuinely useful.</p>
+
+      <h2>How MiroFish Actually Wants Input</h2>
+      <p>MiroFish does not naturally want a neat “ICP JSON” as the seed.</p>
+      <p>It wants:</p>
+      <ul>
+        <li>uploaded source docs</li>
+        <li>a natural-language <code>simulation_requirement</code></li>
+        <li>enough context for ontology and graph generation</li>
+      </ul>
+
+      <h3>Best input packaging for marketing use</h3>
+      <p>Prepare three classes of input:</p>
+      <ol>
+        <li><strong>Evidence packet</strong>
+          <ul>
+            <li>interview summaries</li>
+            <li>objection logs</li>
+            <li>review summaries</li>
+            <li>competitor claims</li>
+            <li>market context</li>
+          </ul>
+        </li>
+        <li><strong>Persona packet</strong>
+          <ul>
+            <li>champion buyer</li>
+            <li>skeptical buyer</li>
+            <li>economic buyer</li>
+            <li>technical evaluator</li>
+            <li>influencer / critic</li>
+          </ul>
+        </li>
+        <li><strong>Scenario brief</strong>
+          <ul>
+            <li>what message / offer / event is being tested</li>
+            <li>which audience segments matter</li>
+            <li>what decision outputs are needed</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>Example simulation requirement</h3>
+      <blockquote>Simulate how B2B RevOps leaders, SDR managers, skeptical founders, and AI-curious operators react over 72 simulated hours to the launch of an autonomous lead-research agent for teams with 10–100 reps. Focus on trust barriers, proof demands, pricing sensitivity, integration concerns, and which narratives spread among advocates vs critics.</blockquote>
+      <p>That is the correct level of specificity.</p>
+
+      <h2>Where the Persona Generation Is Strong — and Weak</h2>
+      <p>Repo inspection suggests persona generation is graph/entity-driven rather than a clean ICP-schema-driven panel generator.</p>
+      <p>In plain English:</p>
+      <ul>
+        <li>it is good at turning entities and context into simulated social actors</li>
+        <li>it is weaker at statistically grounded buyer-population modeling</li>
+      </ul>
+      <p>This makes it good for:</p>
+      <ul>
+        <li>reaction-world simulation</li>
+        <li>objection emergence</li>
+        <li>narrative spread</li>
+        <li>advocate vs critic dynamics</li>
+        <li>launch stress testing</li>
+      </ul>
+      <p>And weaker for:</p>
+      <ul>
+        <li>precise purchase probability modeling</li>
+        <li>demand forecasting</li>
+        <li>private buying committee realism</li>
+        <li>replacing live customer research</li>
+      </ul>
+
+      <h2>Best v1 Use Case</h2>
+      <p>If you want real value fast, start here:</p>
+      <h3>V1 = Synthetic ICP Messaging Stress Test</h3>
+      <ol>
+        <li>Research agents build <strong>3 ICP variants</strong></li>
+        <li>Each variant gets pains, incentives, objections, role dynamics, and message sensitivity</li>
+        <li>Create <strong>2–4 messaging or offer variants</strong></li>
+        <li>Run separate MiroFish simulations</li>
+        <li>Compare objection patterns, skeptic narratives, and resonance</li>
+        <li>Feed results to the CMO agent</li>
+        <li>Run real-world validation afterwards</li>
+      </ol>
+      <p>That is sharp, cheap, and strategically useful.</p>
+
+      <h2>Alternative ICP Strategy</h2>
+      <p>Do not stop at one canonical ICP.</p>
+      <p>Build at least:</p>
+      <ul>
+        <li><strong>Core ICP</strong> — your best current buyer hypothesis</li>
+        <li><strong>Expansion ICP</strong> — an adjacent buyer you might win with adjusted positioning</li>
+        <li><strong>Contrarian ICP</strong> — plausible on paper but high-risk in reality</li>
+      </ul>
+      <p>Then use MiroFish to test where each segment:</p>
+      <ul>
+        <li>reacts fastest</li>
+        <li>resists hardest</li>
+        <li>needs more proof</li>
+        <li>creates stronger positive or negative narrative spread</li>
+      </ul>
+      <p>This is one of the best uses of simulation: <strong>comparing plausible segment futures before committing spend</strong>.</p>
+
+      <h2>n8n Workflow Pattern</h2>
+      <p>A practical automation flow would look like this:</p>
+      <ol>
+        <li><strong>Research ingestion workflow</strong> gathers source material</li>
+        <li><strong>ICP structuring workflow</strong> produces segment and buyer-role packets</li>
+        <li><strong>MiroFish prep workflow</strong> uploads documents and generates graph/simulation setup</li>
+        <li><strong>Simulation execution workflow</strong> runs a capped simulation</li>
+        <li><strong>Result extraction workflow</strong> pulls posts, actions, timelines, agent stats, and report sections</li>
+        <li><strong>CMO workflow</strong> compares evidence + simulation and decides next tests</li>
+      </ol>
+      <p>Important rule: MiroFish output should feed decision support, not automatic action.</p>
+
+      <h2>Decision Framework</h2>
+      <p>The correct stack is:</p>
+      <ul>
+        <li><strong>Truth layer</strong> — structured evidence in Obsidian / warehouse / CRM</li>
+        <li><strong>Simulation layer</strong> — MiroFish for synthetic reaction testing</li>
+        <li><strong>Decision layer</strong> — CMO agent synthesizes evidence + simulation + business constraints</li>
+        <li><strong>Validation layer</strong> — real-world tests, landing pages, outbound, calls, content, campaigns</li>
+      </ul>
+      <p>If you invert this and let MiroFish become the truth layer, you will build delusion into the system.</p>
+
+      <h2>Bottom-Line Recommendation</h2>
+      <p>If I were designing this stack for Christopher, I would do this:</p>
+      <ol>
+        <li>Build a <strong>canonical synthetic ICP schema</strong> in Obsidian/markdown</li>
+        <li>Feed it from layered evidence sources, not one magical vendor</li>
+        <li>Use MiroFish only for <strong>narrow scenario simulations</strong></li>
+        <li>Run multiple ICP and messaging variants through simulation</li>
+        <li>Have the <strong>CMO agent</strong> compare simulation against actual evidence</li>
+        <li>Validate in the real world before institutionalizing conclusions</li>
+      </ol>
+      <p><strong>MiroFish should challenge and enrich your ICP model, not replace reality.</strong></p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://github.com/666ghj/MiroFish">MiroFish GitHub Repository</a></li>
+        <li><a href="https://raw.githubusercontent.com/666ghj/MiroFish/main/README-EN.md">MiroFish README-EN</a></li>
+        <li><a href="https://github.com/camel-ai/oasis">OASIS (Open Agent Social Interaction Simulations)</a></li>
+        <li><a href="https://app.getzep.com/">Zep Cloud</a></li>
+        <li><a href="https://www.g2.com/products/g2-buyer-intent/">G2 Buyer Intent</a></li>
+        <li><a href="https://www.trustradius.com/">TrustRadius</a></li>
+        <li><a href="https://www.capterra.com/">Capterra</a></li>
+        <li><a href="https://bombora.com/our-data/">Bombora Company Surge</a></li>
+        <li><a href="https://www.zoominfo.com/">ZoomInfo</a></li>
+        <li><a href="https://www.apollo.io/">Apollo</a></li>
+        <li><a href="https://clearbit.com/platform/enrichment">Clearbit Enrichment</a></li>
+        <li><a href="https://www.clay.com/integrations">Clay Integrations</a></li>
+        <li><a href="https://corp.owler.com/">Owler</a></li>
+        <li><a href="https://www.brandwatch.com/products/consumer-research/">Brandwatch Consumer Research</a></li>
+        <li><a href="https://sproutsocial.com/insights/social-media-listening/">Sprout Social Listening</a></li>
+        <li><a href="https://redditinc.com/policies/data-api-terms">Reddit Data API Terms</a></li>
+        <li><a href="https://developer.linkedin.com/product-catalog">LinkedIn Developer Product Catalog</a></li>
+        <li><a href="https://lightcast.io/products/data/overview">Lightcast Data Overview</a></li>
+        <li><a href="https://docs.lightcast.io/lightcast-api/docs/introduction">Lightcast API Docs</a></li>
+        <li><a href="https://predictleads.com/job_listings">PredictLeads Job Listings</a></li>
+        <li><a href="https://docs.similarweb.com/api-v5/similarweb-api/website-analysis-api/website-audience/audience-interest">Similarweb Audience Interest API</a></li>
+        <li><a href="https://developer.semrush.com/api/seo/overview/">Semrush API</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      🦞 Baron Von Claw — MiroFish marketing architecture deep dive. &nbsp;|&nbsp; Added 2026-03-30
+    </footer>
+  </main>
+</div>
+</body>
+</html>
