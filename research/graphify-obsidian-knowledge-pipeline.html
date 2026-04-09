@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphify + Obsidian Knowledge Pipeline</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="lobster">🦞</div>
+      <div>
+        <div class="brand">Baron Von Claw</div>
+        <div class="sub">Document Store</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Navigation</div>
+      <div class="sidebar-nav">
+        <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🔬 Research</div>
+      <div class="sidebar-nav">
+        <a href="spec-kit-brief.html"><span class="icon">📋</span> Spec-Kit Brief</a>
+        <a href="spec-kit-deep-dive.html"><span class="icon">🔍</span> Deep Dive</a>
+        <a href="spec-kit-application.html"><span class="icon">🎯</span> Application Analysis</a>
+        <a href="research-man-agent-card.html"><span class="icon">🧠</span> Research Man</a>
+        <a href="mirofish-analysis.html"><span class="icon">🐟</span> MiroFish Analysis</a>
+        <a href="mirofish-marketing-architecture.html"><span class="icon">🧪</span> MiroFish Marketing Architecture</a>
+        <a href="tribe-v2-vs-mirofish.html"><span class="icon">🧠</span> TRIBE v2 vs MiroFish</a>
+        <a href="graphify-obsidian-knowledge-pipeline.html" class="active"><span class="icon">🗃️</span> Graphify + Obsidian</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🎯 Strategy</div>
+      <div class="sidebar-nav">
+        <a href="../strategy/sunburntai-gtm.html"><span class="icon">🔥</span> SunburntAI GTM</a>
+        <a href="../strategy/godfather-offer.html"><span class="icon">💎</span> Godfather Offer</a>
+        <a href="../strategy/icp-framework.html"><span class="icon">👤</span> ICP Framework</a>
+        <a href="../strategy/psychological-conversion.html"><span class="icon">🧠</span> Psych Conversion</a>
+        <a href="../strategy/linkedin.html"><span class="icon">💼</span> LinkedIn</a>
+        <a href="../strategy/digital-employees-workflow-architecture.html"><span class="icon">🧩</span> Marketing Digital Employees Plan</a>
+        <a href="../strategy/obsidian-synthetic-icp-schema.html"><span class="icon">🗂️</span> Obsidian Synthetic ICP Schema</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🏗️ Infrastructure</div>
+      <div class="sidebar-nav">
+        <a href="../infrastructure/vps-plan.html"><span class="icon">🖥️</span> VPS Plan</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">Research</div>
+      <div class="topbar-meta">Last updated: 2026-04-09</div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>🗃️ Graphify + Obsidian Knowledge Pipeline</h1>
+        <p>How to build a librarian-style knowledge pipeline in Obsidian, make backlinks actually matter, and expose the linked knowledge base cleanly to Claude, OpenClaw, and other agents.</p>
+      </div>
+
+      <h2>Bottom Line</h2>
+      <p>If by “Graphify” you mean <strong>getgraphify.com</strong>, it is basically a <strong>Notion visualization SaaS</strong>. It is <strong>not</strong> the right backbone for an Obsidian knowledge system.</p>
+      <p>If by “Graphify” you mean the <strong>open-source Graphify project</strong> (<code>safishamsi/graphify</code> / graphify.net), that is actually useful — but only as a <strong>secondary indexing and export layer</strong> over an Obsidian vault.</p>
+      <p><strong>Recommended architecture:</strong></p>
+      <ul>
+        <li><strong>Obsidian = source of truth</strong></li>
+        <li><strong>Markdown links + frontmatter = canonical structure</strong></li>
+        <li><strong>Dataview + typed relationships = queryable semantics</strong></li>
+        <li><strong>Graphify (open-source) = optional graph/index/export layer for agents</strong></li>
+        <li><strong>Local REST API or MCP = agent access path</strong></li>
+      </ul>
+
+      <h2>What Graphify Actually Is</h2>
+
+      <h3>Graphify #1 — getgraphify.com</h3>
+      <p>This version is a <strong>Notion integration</strong> that visualizes an existing Notion workspace as a knowledge graph.</p>
+      <p>What it is good for:</p>
+      <ul>
+        <li>Notion workspace visualization</li>
+        <li>seeing @mentions, relations, and links as an interactive graph</li>
+      </ul>
+      <p>What it is not good for:</p>
+      <ul>
+        <li>Obsidian-native authoring</li>
+        <li>markdown-first workflows</li>
+        <li>serving as the backbone for an agentic librarian pipeline</li>
+      </ul>
+      <p><strong>Verdict:</strong> low relevance if Obsidian is the brain.</p>
+
+      <h3>Graphify #2 — open-source Graphify</h3>
+      <p>This version is an <strong>open-source knowledge graph builder for AI assistants</strong>.</p>
+      <p>It can ingest:</p>
+      <ul>
+        <li>markdown</li>
+        <li>PDFs</li>
+        <li>images</li>
+        <li>code/docs</li>
+      </ul>
+      <p>It can output:</p>
+      <ul>
+        <li><code>graph.html</code></li>
+        <li><code>GRAPH_REPORT.md</code></li>
+        <li><code>graph.json</code></li>
+        <li>wiki export</li>
+        <li>Obsidian export</li>
+        <li>GraphML / Neo4j / MCP-oriented outputs</li>
+      </ul>
+      <p><strong>Verdict:</strong> useful as an indexing/export/query layer over a curated markdown vault, but not ideal as the primary note system.</p>
+
+      <h2>The Correct Architecture</h2>
+      <p>Do <strong>not</strong> center the system around Graphify.</p>
+      <p>Center it around:</p>
+      <ul>
+        <li>Obsidian</li>
+        <li>good note structure</li>
+        <li>real backlinks</li>
+        <li>frontmatter schema</li>
+        <li>MOCs (maps of content)</li>
+      </ul>
+      <p>Then add Graphify as an accelerator for:</p>
+      <ul>
+        <li>graph extraction</li>
+        <li>machine-queryable structure</li>
+        <li>wiki export</li>
+        <li>agent-facing retrieval</li>
+      </ul>
+
+      <h3>Recommended vault structure</h3>
+<pre><code>00 Inbox/
+10 Sources/
+20 Notes/
+30 Maps/
+40 Entities/
+50 Outputs/
+90 System/
+graphify-out/
+wiki/</code></pre>
+
+      <h3>Folder roles</h3>
+      <ul>
+        <li><strong>00 Inbox</strong> — raw capture, ugly and fast</li>
+        <li><strong>10 Sources</strong> — processed source notes</li>
+        <li><strong>20 Notes</strong> — atomic evergreen notes</li>
+        <li><strong>30 Maps</strong> — MOCs / hub notes / curated indexes</li>
+        <li><strong>40 Entities</strong> — people, orgs, tools, projects, concepts</li>
+        <li><strong>50 Outputs</strong> — briefs, memos, plans, summaries</li>
+        <li><strong>90 System</strong> — templates, automation docs, schemas</li>
+        <li><strong>graphify-out</strong> — generated graph artifacts</li>
+        <li><strong>wiki</strong> — optional agent-crawlable export</li>
+      </ul>
+
+      <h2>How Backlinks Should Actually Work</h2>
+      <p>The problem with most “knowledge graphs” is that they are just pretty pictures of messy notes.</p>
+      <p>To make backlinks real, use these rules:</p>
+
+      <h3>1) One important idea per note</h3>
+      <p>If a concept, person, project, tool, or claim matters repeatedly, it should have its own page.</p>
+      <p>Examples:</p>
+      <ul>
+        <li><code>Concept - Knowledge Graph.md</code></li>
+        <li><code>Tool - Graphify.md</code></li>
+        <li><code>Person - Christopher.md</code></li>
+        <li><code>Project - Marketing Agent OS.md</code></li>
+      </ul>
+
+      <h3>2) Prefer wikilinks over tags for meaning</h3>
+      <p>Use tags for status/type only. Use links for actual relationships.</p>
+      <p>Good:</p>
+<pre><code>[[Obsidian]] supports [[Backlinks]] and can be extended with [[Dataview]].</code></pre>
+      <p>Weak:</p>
+<pre><code>#obsidian #backlinks #dataview</code></pre>
+
+      <h3>3) Use MOCs / hub notes</h3>
+      <p>MOCs are librarian index cards. They prevent the graph from becoming random spaghetti.</p>
+      <p>Examples:</p>
+      <ul>
+        <li><code>MOC - Knowledge Systems.md</code></li>
+        <li><code>MOC - Agents.md</code></li>
+        <li><code>MOC - Obsidian Stack.md</code></li>
+      </ul>
+
+      <h3>4) Add typed relationships in frontmatter</h3>
+      <p>Plain links are human-friendly but untyped. For machine use, add light relationship fields.</p>
+<pre><code>---
+type: concept
+part_of:
+  - "[[Knowledge Management]]"
+related_to:
+  - "[[Obsidian]]"
+  - "[[Graph Theory]]"
+implements:
+  - "[[Librarian Pipeline]]"
+source_notes:
+  - "[[Source - Graphify Docs]]"
+---</code></pre>
+      <p>This lets Dataview and other tools query the graph meaningfully.</p>
+
+      <h3>5) Use a small note taxonomy</h3>
+      <p>Enough to matter, not enough to become ontology hell.</p>
+      <ul>
+        <li><code>type: source</code></li>
+        <li><code>type: concept</code></li>
+        <li><code>type: entity</code></li>
+        <li><code>type: project</code></li>
+        <li><code>type: moc</code></li>
+        <li><code>type: claim</code></li>
+        <li><code>type: decision</code></li>
+      </ul>
+
+      <h2>Plugin Stack</h2>
+      <p>The strongest practical stack is:</p>
+      <ul>
+        <li><strong>Dataview</strong> — query frontmatter and build live indexes</li>
+        <li><strong>Local REST API</strong> — let agents read/write notes programmatically</li>
+        <li><strong>Breadcrumbs</strong> — optional typed links and hierarchy traversal</li>
+        <li><strong>Smart Connections</strong> — optional semantic retrieval layer</li>
+      </ul>
+      <p>My recommendation:</p>
+      <ul>
+        <li>Dataview = yes</li>
+        <li>Local REST API = yes</li>
+        <li>Breadcrumbs = optional if you want richer typed traversal</li>
+        <li>Smart Connections = optional and secondary, not truth layer</li>
+      </ul>
+
+      <h2>The Librarian Pipeline</h2>
+      <p>This is the actual operational design.</p>
+
+      <h3>Stage 1 — Capture</h3>
+      <p>Raw things land quickly and without friction in <code>00 Inbox/</code>.</p>
+      <p>Inputs:</p>
+      <ul>
+        <li>URLs</li>
+        <li>PDFs</li>
+        <li>screenshots</li>
+        <li>transcripts</li>
+        <li>emails/chat snippets</li>
+        <li>voice memos</li>
+        <li>copied text</li>
+      </ul>
+      <p>Stub note example:</p>
+<pre><code>---
+type: inbox
+status: unprocessed
+captured: 2026-04-09
+source_type: url
+source_url: https://...
+topics: []
+entities: []
+---</code></pre>
+
+      <h3>Stage 2 — Normalize</h3>
+      <p>An agent or automation converts raw input into a structured source note inside <code>10 Sources/</code>.</p>
+<pre><code>---
+type: source
+title:
+author:
+source_url:
+created:
+ingested:
+topics:
+entities:
+claims:
+related_to:
+status: processed
+---</code></pre>
+      <p>Body sections:</p>
+      <ul>
+        <li>Summary</li>
+        <li>Key ideas</li>
+        <li>Claims</li>
+        <li>Quotes</li>
+        <li>Open questions</li>
+        <li>Related notes</li>
+      </ul>
+
+      <h3>Stage 3 — Distill</h3>
+      <p>Important ideas become atomic notes in <code>20 Notes/</code> or <code>40 Entities/</code>.</p>
+      <p>Example outputs from one source:</p>
+      <ul>
+        <li><code>Concept - Sparse Attention.md</code></li>
+        <li><code>Tool - Graphify.md</code></li>
+        <li><code>Claim - Backlinks are not enough without typed relations.md</code></li>
+      </ul>
+
+      <h3>Stage 4 — Link and classify</h3>
+      <p>This is where the system becomes a graph instead of a filing cabinet.</p>
+      <p>Add:</p>
+      <ul>
+        <li>backlinks</li>
+        <li>typed fields</li>
+        <li>MOC references</li>
+        <li>entity references</li>
+      </ul>
+
+      <h3>Stage 5 — Curate maps</h3>
+      <p>Generate or maintain MOCs that organize dense domains:</p>
+      <ul>
+        <li>best notes on a topic</li>
+        <li>all related sources</li>
+        <li>open questions</li>
+        <li>current decisions</li>
+      </ul>
+      <p>Dataview can automate much of this.</p>
+
+      <h3>Stage 6 — Build machine index</h3>
+      <p>Run Graphify on the curated subset of the vault rather than the whole mess.</p>
+<pre><code>graphify ./vault-subset --wiki --mcp --graphml</code></pre>
+      <p>Useful outputs:</p>
+      <ul>
+        <li><code>GRAPH_REPORT.md</code></li>
+        <li><code>graph.json</code></li>
+        <li><code>wiki/</code></li>
+      </ul>
+
+      <h3>Stage 7 — Serve to agents</h3>
+      <p>Agents should not read the whole vault blindly. Use staged retrieval:</p>
+      <ol>
+        <li>MOC / index note</li>
+        <li>relevant atomic notes</li>
+        <li>source notes</li>
+        <li>Graphify graph query if needed</li>
+        <li>raw inbox/source asset only as fallback</li>
+      </ol>
+
+      <h2>How Claude and Other Agents Should Access It</h2>
+      <p>Best access modes:</p>
+
+      <h3>Option A — Plain markdown first</h3>
+      <p>Most robust. Agents read MOCs, notes, and source notes directly.</p>
+
+      <h3>Option B — Obsidian Local REST API</h3>
+      <p>Best if you want live vault interaction:</p>
+      <ul>
+        <li>read notes</li>
+        <li>patch headings</li>
+        <li>search vault</li>
+        <li>inspect frontmatter</li>
+        <li>append research cleanly</li>
+      </ul>
+
+      <h3>Option C — MCP over vault or Graphify</h3>
+      <p>Best if you want assistant-native tool access:</p>
+      <ul>
+        <li>vault MCP / connector for markdown</li>
+        <li>Graphify MCP over graph outputs for graph-native traversal</li>
+      </ul>
+
+      <h3>Recommended retrieval policy</h3>
+      <ol>
+        <li>start from curated notes</li>
+        <li>use graph/index second</li>
+        <li>read raw sources only when necessary</li>
+        <li>write back in structured headings and controlled folders</li>
+      </ol>
+
+      <h2>Good Agent Roles in This System</h2>
+      <ul>
+        <li><strong>Ingestor</strong> — moves raw inputs from Inbox to Sources</li>
+        <li><strong>Summarizer</strong> — condenses sources into usable notes</li>
+        <li><strong>Librarian</strong> — creates links, entities, and MOCs</li>
+        <li><strong>Researcher</strong> — traverses notes/graph to answer questions</li>
+        <li><strong>Curator</strong> — cleans duplicates and metadata drift</li>
+      </ul>
+
+      <h2>Risks and Caveats</h2>
+      <ul>
+        <li><strong>Graph fetishism</strong> — the graph view is not the system; it just visualizes the system</li>
+        <li><strong>Over-ontology</strong> — too many edge types kills capture speed</li>
+        <li><strong>Plugin fragility</strong> — keep the stack lean</li>
+        <li><strong>Graphify maturity risk</strong> — useful, but still experimental compared to plain markdown</li>
+        <li><strong>Inferred-edge hallucination</strong> — inferred graph edges should not overwrite canonical note structure</li>
+        <li><strong>Agent vault pollution</strong> — use templates and controlled write zones</li>
+      </ul>
+
+      <h2>Recommended Final Setup</h2>
+      <p>If building this now, I’d do:</p>
+      <ul>
+        <li><strong>Obsidian</strong></li>
+        <li><strong>Dataview</strong></li>
+        <li><strong>Local REST API</strong></li>
+        <li>optional <strong>Breadcrumbs</strong></li>
+        <li>optional <strong>Smart Connections</strong></li>
+        <li>optional <strong>open-source Graphify</strong></li>
+      </ul>
+      <p>Operating model:</p>
+      <ul>
+        <li>Vault is the brain</li>
+        <li>Markdown is truth</li>
+        <li>Frontmatter is schema</li>
+        <li>MOCs are navigation</li>
+        <li>Graphify is an index/export/query layer</li>
+        <li>Agents read curated notes first, graph second, raw sources last</li>
+      </ul>
+
+      <h2>Final Verdict</h2>
+      <p><strong>Do not center the system around Graphify.</strong></p>
+      <p><strong>Center it around Obsidian + good note design.</strong></p>
+      <p>Then add Graphify only if it makes agent retrieval, graph export, or machine-queryable structure better.</p>
+      <p>That is the durable path to a librarian-style knowledge pipeline.</p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://www.getgraphify.com/">Graphify (Notion visualization SaaS)</a></li>
+        <li><a href="https://www.getgraphify.com/blog/graphify-vs-obsidian">Graphify vs Obsidian</a></li>
+        <li><a href="https://www.notion.com/integrations/graphify">Notion Graphify Integration Listing</a></li>
+        <li><a href="https://infranodus.com/use-case/visualize-knowledge-graphs-pkm">InfraNodus on Obsidian knowledge graphs</a></li>
+        <li><a href="https://forum.obsidian.md/t/personal-knowledge-graphs/69264">Obsidian forum: personal knowledge graphs</a></li>
+        <li><a href="https://forum.obsidian.md/t/whats-the-point-of-the-graph-view-how-are-you-using-it/71316">Obsidian forum: graph view discussion</a></li>
+        <li><a href="https://github.com/safishamsi/graphify">Open-source Graphify repository</a></li>
+        <li><a href="https://graphify.net/">Open-source Graphify site</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      🦞 Baron Von Claw — Graphify + Obsidian knowledge pipeline. &nbsp;|&nbsp; Added 2026-04-09
+    </footer>
+  </main>
+</div>
+</body>
+</html>
