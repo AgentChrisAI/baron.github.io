@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hybrid Vault Architecture</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="lobster">🦞</div>
+      <div>
+        <div class="brand">Baron Von Claw</div>
+        <div class="sub">Document Store</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Navigation</div>
+      <div class="sidebar-nav">
+        <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🔬 Research</div>
+      <div class="sidebar-nav">
+        <a href="spec-kit-brief.html"><span class="icon">📋</span> Spec-Kit Brief</a>
+        <a href="spec-kit-deep-dive.html"><span class="icon">🔍</span> Deep Dive</a>
+        <a href="spec-kit-application.html"><span class="icon">🎯</span> Application Analysis</a>
+        <a href="research-man-agent-card.html"><span class="icon">🧠</span> Research Man</a>
+        <a href="mirofish-analysis.html"><span class="icon">🐟</span> MiroFish Analysis</a>
+        <a href="mirofish-marketing-architecture.html"><span class="icon">🧪</span> MiroFish Marketing Architecture</a>
+        <a href="tribe-v2-vs-mirofish.html"><span class="icon">🧠</span> TRIBE v2 vs MiroFish</a>
+        <a href="graphify-obsidian-knowledge-pipeline.html"><span class="icon">🗃️</span> Graphify + Obsidian</a>
+        <a href="llmwiki-compartmentalised-knowledge-system.html"><span class="icon">🧠</span> LLMWiki + Compartments</a>
+        <a href="hybrid-vault-architecture.html" class="active"><span class="icon">🏗️</span> Hybrid Vault Architecture</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🎯 Strategy</div>
+      <div class="sidebar-nav">
+        <a href="../strategy/sunburntai-gtm.html"><span class="icon">🔥</span> SunburntAI GTM</a>
+        <a href="../strategy/godfather-offer.html"><span class="icon">💎</span> Godfather Offer</a>
+        <a href="../strategy/icp-framework.html"><span class="icon">👤</span> ICP Framework</a>
+        <a href="../strategy/psychological-conversion.html"><span class="icon">🧠</span> Psych Conversion</a>
+        <a href="../strategy/linkedin.html"><span class="icon">💼</span> LinkedIn</a>
+        <a href="../strategy/digital-employees-workflow-architecture.html"><span class="icon">🧩</span> Marketing Digital Employees Plan</a>
+        <a href="../strategy/obsidian-synthetic-icp-schema.html"><span class="icon">🗂️</span> Obsidian Synthetic ICP Schema</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🏗️ Infrastructure</div>
+      <div class="sidebar-nav">
+        <a href="../infrastructure/vps-plan.html"><span class="icon">🖥️</span> VPS Plan</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">Research</div>
+      <div class="topbar-meta">Last updated: 2026-04-16</div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>🏗️ Hybrid Vault Architecture</h1>
+        <p>The concrete vault design for Christopher’s knowledge operating system: Raw, Restricted, and Main trust zones; client insight promotion; chronology; review queues; and agent access boundaries.</p>
+      </div>
+
+      <h2>Executive Summary</h2>
+      <p>This system should be built as a <strong>hybrid trust architecture</strong> with three layers:</p>
+      <ul>
+        <li><strong>Raw</strong> — immutable archive of original materials</li>
+        <li><strong>Restricted</strong> — private and confidential compiled knowledge</li>
+        <li><strong>Main</strong> — general operational brain for business, research, projects, and safe promoted insight</li>
+      </ul>
+      <p>The key principle is simple:</p>
+      <p><strong>raw confidential material stays protected, but high-value sanitized learning must still flow upward into the main vault.</strong></p>
+      <p>That avoids two common failure modes:</p>
+      <ul>
+        <li>everything is mixed together and unsafe</li>
+        <li>everything is siloed and useful insights disappear</li>
+      </ul>
+
+      <h2>Architecture Overview</h2>
+      <h3>Layer 1 — Raw</h3>
+      <p>The raw archive is immutable and comprehensive.</p>
+      <p>It stores:</p>
+      <ul>
+        <li>original files</li>
+        <li>exports</li>
+        <li>PDFs</li>
+        <li>docs</li>
+        <li>spreadsheets</li>
+        <li>images</li>
+        <li>newsletters</li>
+        <li>chat exports</li>
+        <li>notes app exports</li>
+        <li>anything else the system ingests</li>
+      </ul>
+      <p>Raw exists for:</p>
+      <ul>
+        <li>preservation</li>
+        <li>reprocessing</li>
+        <li>auditability</li>
+        <li>pipeline failure recovery</li>
+      </ul>
+      <p>Normal agents should not use this as a working memory surface.</p>
+
+      <h3>Layer 2 — Restricted</h3>
+      <p>This is the controlled semantic zone.</p>
+      <p>It stores:</p>
+      <ul>
+        <li>private journals</li>
+        <li>highly sensitive personal material</li>
+        <li>legal/financial-risk material</li>
+        <li>confidential client summaries</li>
+        <li>restricted source notes</li>
+        <li>restricted decisions and patterns</li>
+      </ul>
+      <p>This layer is queryable, but only by high-trust agents or explicit user approval paths.</p>
+
+      <h3>Layer 3 — Main</h3>
+      <p>This is the main operational brain.</p>
+      <p>It stores:</p>
+      <ul>
+        <li>business knowledge</li>
+        <li>research</li>
+        <li>projects</li>
+        <li>playbooks</li>
+        <li>decisions</li>
+        <li>entity pages</li>
+        <li>concept pages</li>
+        <li>MOCs</li>
+        <li>client-safe promoted insights</li>
+      </ul>
+      <p>This is where most agents should work.</p>
+
+      <h2>Trust Model</h2>
+      <p>The system should behave like <strong>two primary graphs plus one archive</strong>:</p>
+
+      <h3>Main Business Graph</h3>
+      <p>Heavily linked.</p>
+      <p>Should include:</p>
+      <ul>
+        <li>business notes</li>
+        <li>projects</li>
+        <li>research</li>
+        <li>clients (safe layer)</li>
+        <li>playbooks</li>
+        <li>ideas</li>
+        <li>decisions</li>
+        <li>general operational knowledge</li>
+      </ul>
+
+      <h3>Restricted Personal Graph</h3>
+      <p>Also linked, but strongly restricted.</p>
+      <p>Should include:</p>
+      <ul>
+        <li>private journals</li>
+        <li>personal reflections</li>
+        <li>private life patterns</li>
+        <li>high-sensitivity personal notes</li>
+      </ul>
+
+      <h3>Cross-graph policy</h3>
+      <p><strong>No default linking between personal and business.</strong></p>
+      <p>Allowed mode: rare manual bridge notes only.</p>
+      <p>This matches the chosen model: <strong>C2</strong>.</p>
+
+      <h2>Client Knowledge Promotion Model</h2>
+      <p>This is the most important structural rule.</p>
+      <p>Client information should exist at three levels:</p>
+
+      <h3>Level A — Raw client material</h3>
+      <ul>
+        <li>contracts</li>
+        <li>raw meeting notes</li>
+        <li>internal documents</li>
+        <li>exports</li>
+        <li>confidential artifacts</li>
+      </ul>
+      <p>Location: Raw archive and/or restricted client zone.</p>
+
+      <h3>Level B — Restricted client summaries</h3>
+      <ul>
+        <li>project summaries</li>
+        <li>issues</li>
+        <li>outcomes</li>
+        <li>patterns</li>
+        <li>lessons</li>
+      </ul>
+      <p>Location: Restricted layer.</p>
+
+      <h3>Level C — Sanitized transferable insight</h3>
+      <ul>
+        <li>generalized lessons</li>
+        <li>repeatable patterns</li>
+        <li>anti-patterns</li>
+        <li>domain playbooks</li>
+        <li>de-identified strategic insights</li>
+      </ul>
+      <p>Location: Main vault.</p>
+
+      <h3>Promotion policy</h3>
+      <p>The chosen model is <strong>B3</strong>:</p>
+      <ul>
+        <li>agents can propose promotion candidates</li>
+        <li>a higher-trust agent approves them</li>
+        <li>only sanitized and non-identifying insight reaches Main</li>
+      </ul>
+      <p>This preserves business learning without leaking client confidentiality.</p>
+
+      <h2>Recommended Folder Shape</h2>
+<pre><code>Knowledge-OS/
+├── raw/
+│   ├── personal/
+│   ├── business/
+│   ├── clients/
+│   ├── chat-exports/
+│   ├── newsletters/
+│   ├── docs/
+│   ├── pdfs/
+│   ├── spreadsheets/
+│   ├── images/
+│   └── manifests/
+│
+├── restricted/
+│   ├── personal/
+│   │   ├── journals/
+│   │   ├── summaries/
+│   │   ├── patterns/
+│   │   └── mocs/
+│   ├── clients/
+│   │   ├── source-notes/
+│   │   ├── summaries/
+│   │   ├── insights/
+│   │   └── review-queue/
+│   └── governance/
+│       ├── confidential-flags/
+│       ├── promotion-candidates/
+│       └── review-digests/
+│
+├── main/
+│   ├── inbox/
+│   ├── sources/
+│   ├── concepts/
+│   ├── entities/
+│   ├── projects/
+│   ├── decisions/
+│   ├── playbooks/
+│   ├── syntheses/
+│   ├── mocs/
+│   ├── timelines/
+│   ├── reviews/
+│   └── system/
+│
+├── staging/
+│   ├── extracted-text/
+│   ├── ocr/
+│   ├── metadata/
+│   ├── file-hashes/
+│   ├── sensitivity/
+│   ├── classification/
+│   ├── dedup/
+│   └── manifests/
+│
+└── indexes/
+    ├── retrieval/
+    ├── graph/
+    ├── search/
+    └── agent-access/
+</code></pre>
+
+      <h2>What Lives Where</h2>
+
+      <h3>Raw</h3>
+      <p>Contains originals only. Never treated as the main working memory.</p>
+
+      <h3>Staging</h3>
+      <p>Contains pipeline artifacts:</p>
+      <ul>
+        <li>OCR text</li>
+        <li>metadata</li>
+        <li>classification output</li>
+        <li>sensitivity scan results</li>
+        <li>dedup clusters</li>
+      </ul>
+
+      <h3>Restricted</h3>
+      <p>Contains restricted compiled knowledge and review queues.</p>
+
+      <h3>Main</h3>
+      <p>Contains the agent-usable operating memory.</p>
+
+      <h2>Chronology</h2>
+      <p>Chronology is important, so the architecture must preserve time explicitly.</p>
+      <p>Every ingested item and durable page should track:</p>
+      <ul>
+        <li>source date</li>
+        <li>ingest date</li>
+        <li>last reviewed date</li>
+        <li>era / timeline grouping where useful</li>
+        <li>supersession status</li>
+      </ul>
+      <p>Main should include:</p>
+      <ul>
+        <li><code>timelines/</code> for domain or project histories</li>
+        <li>decision timelines</li>
+        <li>idea evolution pages</li>
+      </ul>
+
+      <h2>Pipeline Flow</h2>
+      <h3>Primary ingestion flow</h3>
+      <ol>
+        <li>file lands in Raw</li>
+        <li>hash + manifest created</li>
+        <li>text extraction / OCR / parsing runs</li>
+        <li>metadata normalized</li>
+        <li>sensitivity classification runs</li>
+        <li>domain destination suggested</li>
+        <li>source note created</li>
+        <li>summary created</li>
+        <li>entities/topics/dates extracted</li>
+        <li>related pages proposed</li>
+        <li>MOC updates proposed</li>
+        <li>retrieval index updated</li>
+        <li>review queue item created if necessary</li>
+      </ol>
+
+      <h3>Parallel dedup flow</h3>
+      <p>Dedup should be a separate pipeline, not a blocker.</p>
+      <ol>
+        <li>compare hashes / metadata / text similarity</li>
+        <li>cluster near-duplicates</li>
+        <li>detect likely supersession</li>
+        <li>detect recurring themes</li>
+        <li>suggest merges, links, or archival decisions</li>
+        <li>report to review layer</li>
+      </ol>
+      <p>This matches the chosen design: dedup runs in parallel.</p>
+
+      <h2>Agent Access Policy</h2>
+      <h3>Default rule</h3>
+      <p>Agents should not read raw data by default.</p>
+
+      <h3>General agents may access:</h3>
+      <ul>
+        <li>Main MOCs</li>
+        <li>Main concepts</li>
+        <li>Main entities</li>
+        <li>Main source notes</li>
+        <li>Main playbooks</li>
+        <li>Main decisions</li>
+        <li>promoted client-safe insight</li>
+      </ul>
+
+      <h3>Restricted agents may access:</h3>
+      <ul>
+        <li>restricted summaries</li>
+        <li>confidential flags</li>
+        <li>promotion candidates</li>
+        <li>private journals where explicitly permitted</li>
+      </ul>
+
+      <h3>Raw access</h3>
+      <p>Only special-purpose ingestion, audit, or high-trust agents should touch Raw.</p>
+
+      <h2>Daily Review System</h2>
+      <p>The selected daily review priorities are:</p>
+      <ol>
+        <li><strong>Confidential flags</strong> — risk reduction</li>
+        <li><strong>Research gaps</strong> — power upgrade</li>
+        <li><strong>Client insight promotion candidates</strong> — power upgrade</li>
+        <li><strong>Unresolved contradictions</strong> — conflicting-information risk reduction</li>
+        <li><strong>Proposed MOC updates</strong> — navigation upgrade</li>
+      </ol>
+      <p>This is good. It means the system is not just passively storing memory; it is actively improving itself.</p>
+
+      <h2>Note Classes for Main</h2>
+      <p>Main should be built around a small, durable note taxonomy:</p>
+      <ul>
+        <li><code>type: source</code></li>
+        <li><code>type: concept</code></li>
+        <li><code>type: entity</code></li>
+        <li><code>type: project</code></li>
+        <li><code>type: decision</code></li>
+        <li><code>type: playbook</code></li>
+        <li><code>type: synthesis</code></li>
+        <li><code>type: moc</code></li>
+        <li><code>type: timeline</code></li>
+      </ul>
+
+      <h2>Core Metadata</h2>
+      <p>Every durable page should be able to answer:</p>
+      <ul>
+        <li>what is this?</li>
+        <li>what domain is it in?</li>
+        <li>where did it come from?</li>
+        <li>how confident are we?</li>
+        <li>is it active, stale, or superseded?</li>
+        <li>what does it link to?</li>
+      </ul>
+      <p>Minimum useful fields:</p>
+<pre><code>type:
+domain:
+source_refs:
+confidence:
+status:
+created:
+ingested:
+last_reviewed:
+relates_to:
+supersedes:
+superseded_by:</code></pre>
+
+      <h2>Why This Architecture Wins</h2>
+      <ul>
+        <li>Raw preserves everything</li>
+        <li>Restricted protects what must be protected</li>
+        <li>Main remains richly linked and useful</li>
+        <li>client insight is not lost</li>
+        <li>personal and business do not bleed together</li>
+        <li>agents operate mostly on safe compiled memory</li>
+        <li>the system supports chronology, dedup, and review</li>
+      </ul>
+
+      <h2>Failure Modes Avoided</h2>
+      <ul>
+        <li>flat-vault chaos</li>
+        <li>confidential leakage into general retrieval</li>
+        <li>knowledge silos that waste valuable client learning</li>
+        <li>raw-file dependency as the only source of insight</li>
+        <li>pipeline misses that permanently lose information</li>
+      </ul>
+
+      <h2>Final Recommendation</h2>
+      <p>Build the system as:</p>
+      <ul>
+        <li><strong>Raw archive</strong> for preservation and recovery</li>
+        <li><strong>Restricted layer</strong> for private and confidential semantic memory</li>
+        <li><strong>Main vault</strong> for the linked operational brain</li>
+        <li><strong>Promotion workflow</strong> for moving sanitized insight from Restricted into Main</li>
+        <li><strong>Parallel dedup pipeline</strong></li>
+        <li><strong>daily review loop</strong> that upgrades the system over time</li>
+      </ul>
+      <p>This is the right foundation for the next steps: actual schemas, note templates, and agent roles.</p>
+    </div>
+
+    <footer>
+      🦞 Baron Von Claw — hybrid vault architecture. &nbsp;|&nbsp; Added 2026-04-16
+    </footer>
+  </main>
+</div>
+</body>
+</html>
