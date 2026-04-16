@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLMWiki and Compartmentalised Knowledge Systems</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="lobster">🦞</div>
+      <div>
+        <div class="brand">Baron Von Claw</div>
+        <div class="sub">Document Store</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Navigation</div>
+      <div class="sidebar-nav">
+        <a href="../index.html"><span class="icon">🏠</span> Home</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🔬 Research</div>
+      <div class="sidebar-nav">
+        <a href="spec-kit-brief.html"><span class="icon">📋</span> Spec-Kit Brief</a>
+        <a href="spec-kit-deep-dive.html"><span class="icon">🔍</span> Deep Dive</a>
+        <a href="spec-kit-application.html"><span class="icon">🎯</span> Application Analysis</a>
+        <a href="research-man-agent-card.html"><span class="icon">🧠</span> Research Man</a>
+        <a href="mirofish-analysis.html"><span class="icon">🐟</span> MiroFish Analysis</a>
+        <a href="mirofish-marketing-architecture.html"><span class="icon">🧪</span> MiroFish Marketing Architecture</a>
+        <a href="tribe-v2-vs-mirofish.html"><span class="icon">🧠</span> TRIBE v2 vs MiroFish</a>
+        <a href="graphify-obsidian-knowledge-pipeline.html"><span class="icon">🗃️</span> Graphify + Obsidian</a>
+        <a href="llmwiki-compartmentalised-knowledge-system.html" class="active"><span class="icon">🧠</span> LLMWiki + Compartments</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🎯 Strategy</div>
+      <div class="sidebar-nav">
+        <a href="../strategy/sunburntai-gtm.html"><span class="icon">🔥</span> SunburntAI GTM</a>
+        <a href="../strategy/godfather-offer.html"><span class="icon">💎</span> Godfather Offer</a>
+        <a href="../strategy/icp-framework.html"><span class="icon">👤</span> ICP Framework</a>
+        <a href="../strategy/psychological-conversion.html"><span class="icon">🧠</span> Psych Conversion</a>
+        <a href="../strategy/linkedin.html"><span class="icon">💼</span> LinkedIn</a>
+        <a href="../strategy/digital-employees-workflow-architecture.html"><span class="icon">🧩</span> Marketing Digital Employees Plan</a>
+        <a href="../strategy/obsidian-synthetic-icp-schema.html"><span class="icon">🗂️</span> Obsidian Synthetic ICP Schema</a>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">🏗️ Infrastructure</div>
+      <div class="sidebar-nav">
+        <a href="../infrastructure/vps-plan.html"><span class="icon">🖥️</span> VPS Plan</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">Research</div>
+      <div class="topbar-meta">Last updated: 2026-04-16</div>
+    </div>
+
+    <div class="content">
+      <div class="page-header">
+        <h1>🧠 LLMWiki and Compartmentalised Knowledge Systems</h1>
+        <p>The recommended architecture for building an Obsidian-native, agent-maintained knowledge system: llmwiki as the memory engine, compartmentalisation as the control surface, and markdown as the durable truth layer.</p>
+      </div>
+
+      <h2>Executive Summary</h2>
+      <p>Karpathy’s <strong>llmwiki</strong> is the right core pattern. It replaces repeated retrieval from raw documents with a <strong>persistent compiled wiki</strong> that an LLM continually maintains.</p>
+      <p>For Christopher’s use case, the best system is not:</p>
+      <ul>
+        <li>pure RAG</li>
+        <li>pure PARA</li>
+        <li>pure memory palace</li>
+        <li>pure Zettelkasten</li>
+      </ul>
+      <p>The winning design is a hybrid:</p>
+      <ul>
+        <li><strong>domain / scope partitioning</strong> at the top</li>
+        <li><strong>LLM-compiled wiki pages</strong> as semantic memory</li>
+        <li><strong>MOCs / home pages</strong> as human and agent entry points</li>
+        <li><strong>immutable raw sources</strong> for provenance</li>
+        <li><strong>typed links / lightweight graph metadata</strong> for traversal</li>
+        <li><strong>memory lifecycle tiers</strong> so the vault does not become sludge</li>
+        <li><strong>selective visual or spatial synthesis layers</strong> only where they actually help</li>
+      </ul>
+
+      <h2>What LLMWiki Actually Is</h2>
+      <p>LLMWiki is not “RAG with nicer files.”</p>
+      <p>It is a pattern where the LLM:</p>
+      <ul>
+        <li>reads raw source documents</li>
+        <li>extracts and synthesizes their content into a persistent interlinked wiki</li>
+        <li>updates entity, concept, topic, and summary pages</li>
+        <li>flags contradictions and supersession</li>
+        <li>answers questions from the compiled wiki instead of repeatedly rediscovering everything from raw sources</li>
+      </ul>
+
+      <h3>The three-layer model</h3>
+      <ol>
+        <li><strong>Raw sources</strong> — immutable evidence</li>
+        <li><strong>Wiki</strong> — mutable LLM-written synthesis</li>
+        <li><strong>Schema</strong> — operating instructions and maintenance rules</li>
+      </ol>
+
+      <p>This matters because knowledge stops being re-derived and starts being <strong>compiled</strong>.</p>
+
+      <h2>Why This Matters More Than RAG Alone</h2>
+      <p>Ordinary RAG systems tend to:</p>
+      <ul>
+        <li>retrieve chunks</li>
+        <li>re-synthesize from scratch each time</li>
+        <li>lose cumulative insight</li>
+        <li>hide maintenance debt</li>
+      </ul>
+      <p>LLMWiki introduces a persistent intermediate layer that compounds over time.</p>
+      <p>That gives you:</p>
+      <ul>
+        <li>cross-links that already exist</li>
+        <li>contradictions already flagged</li>
+        <li>summaries already evolved</li>
+        <li>answers that can be filed back into the system as new durable artifacts</li>
+      </ul>
+      <p>The real insight is not “markdown.” The real insight is <strong>maintenance</strong>.</p>
+
+      <h2>Compartmentalisation: What Actually Works</h2>
+      <p>There are many ways people try to compartmentalise knowledge. Most are only partially useful.</p>
+
+      <h3>Memory palace / mempalace</h3>
+      <p>Useful as a metaphor for top-level chunking and human recall. Weak as a literal architecture for provenance, machine traversal, and long-term maintenance.</p>
+      <p><strong>Use lightly</strong>: domains can be “wings” or “rooms,” but do not build the whole vault as spatial theatre.</p>
+
+      <h3>PARA</h3>
+      <p>Good for operational organization and active/inactive work routing. Weak as a semantic knowledge architecture.</p>
+      <p><strong>Use as an outer workflow shell, not the inner memory model.</strong></p>
+
+      <h3>Zettelkasten</h3>
+      <p>Strong on linking discipline and bottom-up knowledge development. Weak when people turn it into note atomization cosplay.</p>
+      <p><strong>Steal the linking discipline, not the fetish for endless fragments.</strong></p>
+
+      <h3>Maps of Content (MOCs)</h3>
+      <p>One of the strongest patterns available for Obsidian and agents.</p>
+      <p>MOCs act as:</p>
+      <ul>
+        <li>curated hubs</li>
+        <li>entry points</li>
+        <li>control panels</li>
+        <li>navigational scaffolds over graph sprawl</li>
+      </ul>
+
+      <h3>Typed graph overlays</h3>
+      <p>Very useful for agents if kept lightweight.</p>
+      <p>Do not start with a giant ontology. Start with a small relation set that actually matters.</p>
+
+      <h2>The Recommended Hybrid Architecture</h2>
+      <p>This is the recommended pattern for Christopher’s system.</p>
+
+      <h3>1) Domain compartments first</h3>
+      <p>Top-level organization should reflect actual operating domains, not generic PKM ideology.</p>
+      <p>Examples:</p>
+      <ul>
+        <li><code>Builder/</code></li>
+        <li><code>Council/</code></li>
+        <li><code>Research/</code></li>
+        <li><code>Inbox/</code></li>
+        <li><code>Archive/</code></li>
+        <li><code>System/</code></li>
+      </ul>
+      <p>This reduces retrieval noise and gives agents clearer scope boundaries.</p>
+
+      <h3>2) Immutable raw source layer</h3>
+      <p>Karpathy is right here. This should be non-negotiable.</p>
+      <p>Separate:</p>
+      <ul>
+        <li>raw captures</li>
+        <li>working summaries</li>
+        <li>durable synthesized pages</li>
+      </ul>
+      <p>This preserves provenance, auditability, and reprocessing ability.</p>
+
+      <h3>3) LLM-maintained semantic wiki</h3>
+      <p>This is the middle layer where knowledge compounds.</p>
+      <p>Good durable page types:</p>
+      <ul>
+        <li>entity</li>
+        <li>concept</li>
+        <li>project</li>
+        <li>decision</li>
+        <li>playbook</li>
+        <li>source summary</li>
+        <li>synthesis</li>
+        <li>open question</li>
+      </ul>
+
+      <h3>4) MOCs as human and agent entry points</h3>
+      <p>Every major domain should have a small number of navigation surfaces:</p>
+      <ul>
+        <li>Builder Home</li>
+        <li>Council Home</li>
+        <li>Research Home</li>
+        <li>Active Decisions</li>
+        <li>Core Entities</li>
+        <li>Current Priorities</li>
+      </ul>
+      <p>These act as curated dashboards and dramatically improve agent retrieval quality.</p>
+
+      <h3>5) Memory lifecycle tiers</h3>
+      <p>This is one of the most important upgrades over naive note systems.</p>
+      <p>Recommended tiers:</p>
+      <ol>
+        <li><strong>Inbox / fleeting</strong> — raw captures, clips, meeting dumps</li>
+        <li><strong>Source summaries</strong> — one source, one synthesized note</li>
+        <li><strong>Domain pages</strong> — consolidated semantic memory</li>
+        <li><strong>Playbooks / decisions</strong> — procedural memory</li>
+        <li><strong>Archives</strong> — stale but recoverable</li>
+      </ol>
+      <p>Without lifecycle tiers, the vault turns into sludge.</p>
+
+      <h3>6) Confidence and supersession</h3>
+      <p>Knowledge should be allowed to age.</p>
+      <p>Useful frontmatter fields:</p>
+<pre><code>type:
+domain:
+source_refs:
+confidence:
+status: active | stale | superseded
+last_reviewed:
+supersedes:
+superseded_by:</code></pre>
+      <p>This is essential for avoiding old claims silently sitting beside new claims as if both are equally trustworthy.</p>
+
+      <h3>7) Lightweight graph semantics</h3>
+      <p>Use a small, high-value set of typed relations:</p>
+      <ul>
+        <li><code>relates_to</code></li>
+        <li><code>depends_on</code></li>
+        <li><code>supports</code></li>
+        <li><code>contradicts</code></li>
+        <li><code>part_of</code></li>
+        <li><code>decision_for</code></li>
+        <li><code>source_for</code></li>
+        <li><code>supersedes</code></li>
+      </ul>
+      <p>That is enough to make the graph useful to agents without building ontology hell.</p>
+
+      <h2>What to Avoid</h2>
+      <ul>
+        <li>Literal memory-palace theatrics as core architecture</li>
+        <li>Pure PARA as the semantic model</li>
+        <li>Hyper-atomic Zettelkasten fragmentation</li>
+        <li>Canvas-first systems as the main database</li>
+        <li>Backlink worship without curation</li>
+        <li>Letting agents write everywhere with no lifecycle controls</li>
+        <li>Using semantic similarity as if it were truth</li>
+      </ul>
+      <p>If the system is pretty but retrieval, trust, and maintenance are weak, it is fake architecture.</p>
+
+      <h2>Practical Recommendation</h2>
+      <p>The recommended architecture for Christopher’s Obsidian + agent stack is:</p>
+      <ul>
+        <li><strong>llmwiki for knowledge compilation</strong></li>
+        <li><strong>domain compartments for context separation</strong></li>
+        <li><strong>MOCs for navigation</strong></li>
+        <li><strong>memory tiers for lifecycle control</strong></li>
+        <li><strong>typed links for graph usefulness</strong></li>
+        <li><strong>confidence + supersession fields for durability</strong></li>
+      </ul>
+      <p>That is the durable version. That is the one worth building.</p>
+
+      <h2>Why This Wins</h2>
+      <p>This pattern balances:</p>
+      <ul>
+        <li>human readability</li>
+        <li>agent maintainability</li>
+        <li>provenance</li>
+        <li>navigability</li>
+        <li>incremental compounding of knowledge</li>
+        <li>controlled compartmentalisation</li>
+      </ul>
+      <p>It gives you a system that acts more like a librarian-maintained research institution and less like a pile of notes with a graph view.</p>
+
+      <h2>Final Verdict</h2>
+      <p><strong>Use llmwiki as the memory engine.</strong></p>
+      <p><strong>Use compartmentalisation as the control surface.</strong></p>
+      <p><strong>Use markdown as the durable truth layer.</strong></p>
+      <p>Everything else should serve those three priorities.</p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">Karpathy — llm-wiki gist</a></li>
+        <li><a href="https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2">LLM Wiki v2 gist</a></li>
+        <li><a href="https://www.mindstudio.ai/blog/andrej-karpathy-llm-wiki-knowledge-base-claude-code/">MindStudio — Karpathy LLM Wiki explainer</a></li>
+        <li><a href="https://atlan.com/know/llm-wiki-vs-rag-knowledge-base/">Atlan — LLM Wiki vs RAG</a></li>
+        <li><a href="https://artofmemory.com/blog/how-to-build-a-memory-palace/">Art of Memory — memory palace</a></li>
+        <li><a href="https://psyche.co/guides/how-to-build-a-memory-palace-to-store-and-revisit-information">Psyche — memory palace guide</a></li>
+        <li><a href="https://www.magneticmemorymethod.com/memory-palace/">Magnetic Memory Method — memory palace technique</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      🦞 Baron Von Claw — llmwiki and compartmentalised knowledge systems. &nbsp;|&nbsp; Added 2026-04-16
+    </footer>
+  </main>
+</div>
+</body>
+</html>
